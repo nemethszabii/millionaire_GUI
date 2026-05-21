@@ -1,0 +1,104 @@
+package com.demo;
+
+import com.demo.GUI.GuiDisplay;
+
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
+
+public class GameEngine {
+    private GuiDisplay gui;
+    private Scanner sc;
+    private GameContent gc;
+    private Player player;
+
+    public GameEngine(GuiDisplay gui, Scanner sc, String filename) {
+        this.gui = gui;
+        this.sc = sc;
+        this.gc = new GameContent(filename);
+        this.player = new Player();
+    }
+
+    public void mainMenu() {
+        String choice = "";
+        do {
+            gui.displayMsg("1 - Start Game");
+            gui.displayMsg("2 - Leaderboard");
+            gui.displayMsg("3 - Quit");
+            gui.displayInLineMsg("Choice: ");
+            choice = sc.nextLine();
+            switch (choice) {
+                case "1":
+                    startGame();
+                    break;
+                case "2":
+                    showLeaderboard();
+                    break;
+                case "3":
+                    gui.displayMsg("Closing game...");
+                    System.exit(0);
+                    break;
+                default:
+                    gui.displayMsg("Choose a correct option [1, 2 or 3]");
+                    break;
+            }
+        } while (!choice.equals("3"));
+    }
+
+    private void startGame() {
+        TerminalHandler.clearConsole();
+        getPlayerName();
+        gui.displayMsg(String.format("Hello, %s! The game is starting in a sec...", player.getName()));
+        TreeMap<Integer, Question> qna = this.gc.getQna();
+        int i = 0;
+        String userAnswer = "";
+        while (i < qna.size()) {
+            TerminalHandler.clearConsole();
+            String question = qna.get(i).getContent();
+            String answer = qna.get(i).getAnswer();
+            displayQuestions(question, answer, i);
+            userAnswer = getUserAnswer();
+            if (userAnswer.equals("a")) {
+                gui.displayMsg("Correct!");
+                this.player.incrementScore();
+                i++;
+            } else {
+                gui.displayMsg("Wrong!");
+            }
+        }
+    }
+
+    private String getUserAnswer() {
+        String userAnswer = "";
+        do {
+            gui.displayInLineMsg("Choose an answer [a, b, c or d]: ");
+            userAnswer = sc.nextLine();
+        } while (!Set.of("a", "b", "c", "d").contains(userAnswer));
+        return userAnswer;
+    }
+
+    private void displayQuestions(String question, String answer, int i) {
+        gui.displayMsg(i + ". question:");
+        gui.displayMsg(question);
+        gui.displayMsg("a - " + answer);
+        gui.displayMsg("b - demo");
+        gui.displayMsg("c - demo");
+        gui.displayMsg("d - demo");
+    }
+
+    private void showLeaderboard() {
+        gui.displayMsg("Leaderboard");
+    }
+
+    private void getPlayerName() {
+        String name = "";
+        do {
+            gui.displayInLineMsg("Name: ");
+            name = sc.nextLine();
+            if (name.equals("") || name.length() < 3) {
+                gui.displayMsg("Invalid name. Try again.");
+            }
+        } while (name.equals("") || name.length() < 3);
+        this.player.setName(name);
+    }
+}
