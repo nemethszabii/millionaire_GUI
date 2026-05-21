@@ -13,7 +13,7 @@ public class Player {
     }
 
     public void incrementScore() {
-        this.score += score;
+        this.score += 1;
     }
 
     public String getName() {

@@ -9,10 +9,13 @@ import java.util.*;
 
 public class GameContent {
     private TreeMap<Integer, Question> qna = new TreeMap<>();
+    private TreeMap<String, String> shuffledOptions = new TreeMap<>();
 
     public TreeMap<Integer, Question> getQna() {
         return qna;
     }
+
+    public TreeMap<String, String> getShuffledOptions() { return shuffledOptions; }
 
     public GameContent(String qnaFile) {
         readInGameContent(qnaFile);
@@ -47,18 +50,17 @@ public class GameContent {
         gui.displayMsg(i + 1 + ". question");
         gui.displayMsg("Score: " + player.getScore());
         gui.displayMsg(question);
-        TreeMap<String, String> shuffled = buildShuffledOptions(i);
-        displayAnswers(gui, shuffled);
+        buildShuffledOptions(i);
+        displayAnswers(gui);
     }
 
-    private void displayAnswers(GuiDisplay gui, TreeMap<String, String> shuffled) {
-        for (String key : shuffled.keySet()) {
-            gui.displayMsg(key + ": " + shuffled.get(key));
+    private void displayAnswers(GuiDisplay gui) {
+        for (String key : shuffledOptions.keySet()) {
+            gui.displayMsg(key + ": " + shuffledOptions.get(key));
         }
     }
 
-    private TreeMap<String, String> buildShuffledOptions(int i) {
-        TreeMap<String, String> options = new TreeMap<>();
+    private void buildShuffledOptions(int i) {
         List<String> availableOptions = new ArrayList<>();
         availableOptions.add(qna.get(i).getAnswer());
         availableOptions.add(qna.get(i).getDummies()[0]);
@@ -73,10 +75,9 @@ public class GameContent {
         while (j < 4) {
             String option = getRandomOption(availableOptions);
             String charKey = getRandomOption(availableChars);
-            options.put(charKey, option);
+            shuffledOptions.put(charKey, option);
             j++;
         }
-        return options;
     }
 
     private String getRandomOption(List<String> availableOptions) {

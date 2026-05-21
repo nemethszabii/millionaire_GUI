@@ -59,7 +59,7 @@ public class GameEngine {
             TerminalHandler.clearConsole();
             gc.displayQuestion(gui, i, player);
             userAnswer = getPlayerAnswer();
-            if (userAnswer.equals(gc.getQna().get(i).getAnswer())) {
+            if (gc.getShuffledOptions().get(userAnswer).equals(gc.getQna().get(i).getAnswer())) {
                 gui.displayMsg("Correct!");
                 this.player.incrementScore();
                 i++;
