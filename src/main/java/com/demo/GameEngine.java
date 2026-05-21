@@ -42,7 +42,7 @@ public class GameEngine {
                     gui.displayMsg("Choose a correct option [1, 2 or 3]");
                     break;
             }
-        } while (!choice.equals("3"));
+        } while (true);
     }
 
     private void startGame() {
@@ -54,10 +54,8 @@ public class GameEngine {
         String userAnswer = "";
         while (i < qna.size()) {
             TerminalHandler.clearConsole();
-            String question = qna.get(i).getContent();
-            String answer = qna.get(i).getAnswer();
-            displayQuestions(question, answer, i);
-            userAnswer = getUserAnswer();
+            gc.displayQuestion(gui, i);
+            userAnswer = getPlayerAnswer();
             if (userAnswer.equals("a")) {
                 gui.displayMsg("Correct!");
                 this.player.incrementScore();
@@ -68,22 +66,13 @@ public class GameEngine {
         }
     }
 
-    private String getUserAnswer() {
+    private String getPlayerAnswer() {
         String userAnswer = "";
         do {
             gui.displayInLineMsg("Choose an answer [a, b, c or d]: ");
             userAnswer = sc.nextLine();
         } while (!Set.of("a", "b", "c", "d").contains(userAnswer));
         return userAnswer;
-    }
-
-    private void displayQuestions(String question, String answer, int i) {
-        gui.displayMsg(i + ". question:");
-        gui.displayMsg(question);
-        gui.displayMsg("a - " + answer);
-        gui.displayMsg("b - demo");
-        gui.displayMsg("c - demo");
-        gui.displayMsg("d - demo");
     }
 
     private void showLeaderboard() {
@@ -95,10 +84,10 @@ public class GameEngine {
         do {
             gui.displayInLineMsg("Name: ");
             name = sc.nextLine();
-            if (name.equals("") || name.length() < 3) {
+            if (name.length() < 3) {
                 gui.displayMsg("Invalid name. Try again.");
             }
-        } while (name.equals("") || name.length() < 3);
+        } while (name.length() < 3);
         this.player.setName(name);
     }
 }

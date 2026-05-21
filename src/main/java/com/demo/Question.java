@@ -3,6 +3,11 @@ package com.demo;
 public class Question {
     private String content;
     private String answer;
+    private String[] dummies;
+
+    public String[] getDummies() {
+        return dummies;
+    }
 
     public String getContent() {
         return content;
@@ -12,9 +17,10 @@ public class Question {
         return answer;
     }
 
-    public Question(String content, String answer) {
+    public Question(String content, String answer, String[] dummies) {
         this.content = content;
         this.answer = answer;
+        this.dummies = dummies;
     }
 
     public Question() {
