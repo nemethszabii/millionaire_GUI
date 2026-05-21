@@ -5,6 +5,7 @@ import com.demo.models.Question;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -51,5 +52,10 @@ public class GameContent {
         gui.displayMsg("b - " + dummies[0]);
         gui.displayMsg("c - "  + dummies[1]);
         gui.displayMsg("d - "  + dummies[2]);
+    }
+
+    private void createShuffledOptions() {
+        LinkedHashMap<String, String> options = new LinkedHashMap<>();
+        
     }
 }
