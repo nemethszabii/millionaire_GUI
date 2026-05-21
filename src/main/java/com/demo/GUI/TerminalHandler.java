@@ -1,4 +1,4 @@
-package com.demo;
+package com.demo.GUI;
 
 public class TerminalHandler {
     public static void clearConsole() {

@@ -1,6 +1,9 @@
-package com.demo;
+package com.demo.logic;
 
 import com.demo.GUI.GuiDisplay;
+import com.demo.GUI.TerminalHandler;
+import com.demo.models.Player;
+import com.demo.models.Question;
 
 import java.util.Scanner;
 import java.util.Set;

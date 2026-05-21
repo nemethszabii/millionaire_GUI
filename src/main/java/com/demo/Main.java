@@ -2,6 +2,7 @@ package com.demo;
 
 import com.demo.GUI.ConsoleGuiDisplay;
 import com.demo.GUI.GuiDisplay;
+import com.demo.logic.GameEngine;
 
 import java.util.Scanner;
 

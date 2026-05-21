@@ -1,6 +1,7 @@
-package com.demo;
+package com.demo.logic;
 
 import com.demo.GUI.GuiDisplay;
+import com.demo.models.Question;
 
 import java.io.File;
 import java.util.Arrays;

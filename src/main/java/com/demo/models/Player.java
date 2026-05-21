@@ -1,4 +1,4 @@
-package com.demo;
+package com.demo.models;
 
 public class Player {
     private String name;
