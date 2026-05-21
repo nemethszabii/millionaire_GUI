@@ -1,13 +1,11 @@
 package com.demo.logic;
 
 import com.demo.GUI.GuiDisplay;
+import com.demo.models.Player;
 import com.demo.models.Question;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 public class GameContent {
     private TreeMap<Integer, Question> qna = new TreeMap<>();
@@ -42,20 +40,50 @@ public class GameContent {
         }
     }
 
-    public void displayQuestion(GuiDisplay gui, int i) {
+    public void displayQuestion(GuiDisplay gui, int i, Player player) {
         String question = qna.get(i).getContent();
         String answer = qna.get(i).getAnswer();
         String[] dummies = qna.get(i).getDummies();
-        gui.displayMsg(i + 1 + ". question:");
+        gui.displayMsg(i + 1 + ". question");
+        gui.displayMsg("Score: " + player.getScore());
         gui.displayMsg(question);
-        gui.displayMsg("a - " + answer);
-        gui.displayMsg("b - " + dummies[0]);
-        gui.displayMsg("c - "  + dummies[1]);
-        gui.displayMsg("d - "  + dummies[2]);
+        TreeMap<String, String> shuffled = buildShuffledOptions(i);
+        displayAnswers(gui, shuffled);
     }
 
-    private void createShuffledOptions() {
-        LinkedHashMap<String, String> options = new LinkedHashMap<>();
-        
+    private void displayAnswers(GuiDisplay gui, TreeMap<String, String> shuffled) {
+        for (String key : shuffled.keySet()) {
+            gui.displayMsg(key + ": " + shuffled.get(key));
+        }
+    }
+
+    private TreeMap<String, String> buildShuffledOptions(int i) {
+        TreeMap<String, String> options = new TreeMap<>();
+        List<String> availableOptions = new ArrayList<>();
+        availableOptions.add(qna.get(i).getAnswer());
+        availableOptions.add(qna.get(i).getDummies()[0]);
+        availableOptions.add(qna.get(i).getDummies()[1]);
+        availableOptions.add(qna.get(i).getDummies()[2]);
+        List<String> availableChars = new ArrayList<>();
+        availableChars.add("a");
+        availableChars.add("b");
+        availableChars.add("c");
+        availableChars.add("d");
+        int j = 0;
+        while (j < 4) {
+            String option = getRandomOption(availableOptions);
+            String charKey = getRandomOption(availableChars);
+            options.put(charKey, option);
+            j++;
+        }
+        return options;
+    }
+
+    private String getRandomOption(List<String> availableOptions) {
+        Random rand = new Random();
+        int index = rand.nextInt(availableOptions.size());
+        String option = availableOptions.get(index);
+        availableOptions.remove(option);
+        return option;
     }
 }

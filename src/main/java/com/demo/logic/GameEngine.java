@@ -32,7 +32,7 @@ public class GameEngine {
             choice = sc.nextLine();
             switch (choice) {
                 case "1":
-                    startGame();
+                    runGame();
                     break;
                 case "2":
                     showLeaderboard();
@@ -48,7 +48,7 @@ public class GameEngine {
         } while (true);
     }
 
-    private void startGame() {
+    private void runGame() {
         TerminalHandler.clearConsole();
         getPlayerName();
         gui.displayMsg(String.format("Hello, %s! The game is starting in a sec...", player.getName()));
@@ -57,14 +57,15 @@ public class GameEngine {
         String userAnswer = "";
         while (i < qna.size()) {
             TerminalHandler.clearConsole();
-            gc.displayQuestion(gui, i);
+            gc.displayQuestion(gui, i, player);
             userAnswer = getPlayerAnswer();
-            if (userAnswer.equals("a")) {
+            if (userAnswer.equals(gc.getQna().get(i).getAnswer())) {
                 gui.displayMsg("Correct!");
                 this.player.incrementScore();
                 i++;
             } else {
-                gui.displayMsg("Wrong!");
+                gui.displayMsg("You lost!");
+                i = qna.size();
             }
         }
     }
