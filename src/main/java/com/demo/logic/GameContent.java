@@ -48,7 +48,8 @@ public class GameContent {
         String answer = qna.get(i).getAnswer();
         String[] dummies = qna.get(i).getDummies();
         gui.displayMsg(i + 1 + ". question");
-        gui.displayMsg("Score: " + player.getScore());
+        gui.displayMsg("Prize: $" + player.getPrize());
+        gui.displayMsg("Guaranteed prize: $" + player.getGuaranteedPrize());
         gui.displayMsg(question);
         buildShuffledOptions(i);
         displayAnswers(gui);
