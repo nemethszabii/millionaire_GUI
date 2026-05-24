@@ -81,11 +81,21 @@ public class GameContent {
         }
     }
 
-    private String getRandomOption(List<String> availableOptions) {
+    public static String getRandomOption(List<String> availableOptions) {
         Random rand = new Random();
         int index = rand.nextInt(availableOptions.size());
         String option = availableOptions.get(index);
         availableOptions.remove(option);
         return option;
+    }
+
+    public String getKeyFromValue(int i) {
+        String answer = qna.get(i).getAnswer();
+        for (Map.Entry<String, String> entry : shuffledOptions.entrySet()) {
+            if (entry.getValue().equals(answer)) {
+                return entry.getKey();
+            }
+        };
+        return "";
     }
 }
