@@ -1,28 +1,26 @@
 package com.demo.models;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Player {
     private String name;
     private int prize;
     private int guaranteedPrize;
     private Map<Integer, Integer> prizes;
+    private String[] availableHelps;
+
+    public String[] getAvailableHelps() { return availableHelps; }
+
+    public void setAvailableHelps(String[] availableHelps) { this.availableHelps = availableHelps; }
 
     public int getGuaranteedPrize() {
         return guaranteedPrize;
     }
 
-    public int getPrize() {
-        return prize;
-    }
-
-    public void incrementPrize(int index) {
-        this.prize = this.prizes.get(index);
-        if (index % 5 == 0) {
-            this.guaranteedPrize = this.prizes.get(index);
-        }
-    }
+    public int getPrize() { return prize; }
 
     public String getName() {
         return name;
@@ -32,15 +30,17 @@ public class Player {
         this.name = name;
     }
 
-    public Player(String name) {
-        this.name = name;
-        this.prize = 0;
-        setUpPrizes();
-    }
-
     public Player() {
         this.prize = 0;
         setUpPrizes();
+        availableHelps = new String[] {"50:50", "Phone", "Audience"};
+    }
+
+    public void incrementPrize(int index) {
+        this.prize = this.prizes.get(index);
+        if (index % 5 == 0) {
+            this.guaranteedPrize = this.prizes.get(index);
+        }
     }
 
     private void setUpPrizes() {

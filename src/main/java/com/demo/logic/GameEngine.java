@@ -23,7 +23,7 @@ public class GameEngine {
         this.sc = sc;
         this.gc = new GameContent(filename);
         this.player = new Player();
-        this.help = new Help(gui, sc);
+        this.help = new Help(gui, sc, player);
     }
 
     public void mainMenu() {
@@ -72,10 +72,16 @@ public class GameEngine {
             switch (userAnswer) {
                 case "q":
                     i = qna.size();
-                    this.gameState = "quit";
+                    gameState = "quit";
                     break;
                 case "h":
-                    userAnswer = mainHelpLogic(shuffledOptions, i);
+                    if (player.getAvailableHelps().length > 0) {
+                        String solutionKey = gc.getKeyFromValue(i);
+                        userAnswer = help.helpMenu(shuffledOptions, solutionKey);
+                    } else {
+                        gui.displayMsg("No available help found! You have already used up all of them.");
+                        userAnswer = getPlayerAnswer(Set.of("a", "b", "c", "d", "q"), true);
+                    }
                     isCorrect = evaluatePlayerAnswer(shuffledOptions, userAnswer, i);
                     break;
                 default:
@@ -94,15 +100,20 @@ public class GameEngine {
     }
 
     private boolean evaluatePlayerAnswer(TreeMap<String, String> shuffledOptions, String userAnswer, int i) {
-        String chosenAnswer = shuffledOptions.get(userAnswer);
-        String realAnswer = gc.getQna().get(i).getAnswer();
-        if (chosenAnswer.equals(realAnswer)) {
-            gui.displayMsg("Correct!");
-            this.gameState = "play";
-            return true;
-        } else {
-            this.gameState = "lost";
+        if (userAnswer.equals("q")) {
+            gameState = "quit";
             return false;
+        } else {
+            String chosenAnswer = shuffledOptions.get(userAnswer);
+            String realAnswer = gc.getQna().get(i).getAnswer();
+            if (chosenAnswer.equals(realAnswer)) {
+                gui.displayMsg("Correct!");
+                this.gameState = "play";
+                return true;
+            } else {
+                this.gameState = "lost";
+                return false;
+            }
         }
     }
 
@@ -128,10 +139,19 @@ public class GameEngine {
     private String getPlayerAnswer(Set<String> answerOptions) {
         String answer;
         do {
-            if (answerOptions.size() > 2) {
-                gui.displayInLineMsg("Choose an answer [a, b, c, d] or get help [h] or to quit [q]: ");
+            gui.displayInLineMsg("Choose an answer [a, b, c, d] or get help [h] or to quit [q]: ");
+            answer = sc.nextLine();
+        } while (!answerOptions.contains(answer));
+        return answer;
+    }
+
+    private String getPlayerAnswer(Set<String> answerOptions, boolean comingFromHelp) {
+        String answer;
+        do {
+            if (comingFromHelp) {
+                gui.displayInLineMsg("Please enter your choice [a, b, c, d] or quit [q]: ");
             } else {
-                gui.displayInLineMsg("Choose an option: ");
+                gui.displayInLineMsg("Choose an answer [a, b, c, d] or get help [h] or to quit [q]: ");
             }
             answer = sc.nextLine();
         } while (!answerOptions.contains(answer));
@@ -164,25 +184,5 @@ public class GameEngine {
                 - You get a guaranteed prize after the 5., 10. and 15. question!
                 - Your result will be written to the leaderboard!
         """);
-    }
-
-    public String mainHelpLogic(TreeMap<String, String> shuffledOptions, int i) {
-        String answer = this.help.displayHelpOptions();
-        switch (answer) {
-            case "1":
-                String solutionKey = this.gc.getKeyFromValue(i);
-                Set<String> optionsFiftyFifty = this.help.fiftyFifty(shuffledOptions, solutionKey);
-                return getPlayerAnswer(optionsFiftyFifty);
-            case "2":
-                this.help.phone(shuffledOptions);
-                break;
-            case "3":
-                this.help.audience(shuffledOptions);
-                break;
-            default:
-                gui.displayMsg("Choose a correct option!");
-                return "";
-        }
-        return "";
     }
 }
