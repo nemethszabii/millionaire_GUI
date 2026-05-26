@@ -14,7 +14,7 @@ public class GameEngine {
     private final GuiDisplay gui;
     private final Scanner sc;
     private final GameContent gc;
-    private final Player player;
+    private Player player;
     private String gameState;
     private Help help;
 
@@ -22,8 +22,6 @@ public class GameEngine {
         this.gui = gui;
         this.sc = sc;
         this.gc = new GameContent(filename);
-        this.player = new Player();
-        this.help = new Help(gui, sc, player);
     }
 
     public void mainMenu() {
@@ -54,6 +52,8 @@ public class GameEngine {
 
     private void runGame() {
         TerminalHandler.clearConsole();
+        this.player = new Player();
+        this.help = new Help(gui, sc, player);
         getPlayerName();
         inGameLogic();
     }

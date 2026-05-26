@@ -42,8 +42,8 @@ public class Help {
         return answer;
     }
 
-    public void phone() {
-        gui.displayMsg("Hey! I guess, 'a' is the correct answer!");
+    public void phone(String solutionKey) {
+        gui.displayMsg("Hey! I guess, '" + solutionKey + "' is the correct answer!");
     }
 
     public void audience() {
@@ -73,12 +73,12 @@ public class Help {
                 answer = fiftyFifty(shuffledOptions, solutionKey);
                 break;
             case "Phone":
-                phone();
-                answer = getPlayerAnswer(Set.of("a", "b", "c", "d"));
+                phone(solutionKey);
+                answer = getPlayerAnswer(Set.of("a", "b", "c", "d", "q"));
                 break;
             case "Audience":
                 audience();
-                answer = getPlayerAnswer(Set.of("a", "b", "c", "d"));
+                answer = getPlayerAnswer(Set.of("a", "b", "c", "d", "q"));
                 break;
         }
         return answer;
@@ -87,7 +87,7 @@ public class Help {
     private String getPlayerAnswer(Set<String> answerOptions) {
         String answer;
         do {
-            gui.displayInLineMsg("Choose an answer [a, b, c, d] or get help [h] or to quit [q]: ");
+            gui.displayInLineMsg("Choose an answer [a, b, c, d] or to quit [q]: ");
             answer = sc.nextLine();
         } while (!answerOptions.contains(answer));
         return answer;
