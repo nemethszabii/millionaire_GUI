@@ -1,46 +1,48 @@
 package com.demo.logic;
 
 import com.demo.GUI.GuiDisplay;
+import com.demo.models.Player;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Leaderboard {
     private File file;
     private String filename;
     private GuiDisplay gui;
-    private List<String> leaderboard;
-
-    public List<String> getLeaderboard() {
-        return leaderboard;
-    }
+    private List<Player> leaderboard;
 
     public Leaderboard(String filename, GuiDisplay gui) {
         this.filename = filename;
         this.file = new File(filename);
         this.gui = gui;
-        this.leaderboard = readLeaderboard();
+        this.leaderboard = read();
     }
 
-    private List<String> readLeaderboard() {
-        List<String> lb = new ArrayList<>();
-        try (Scanner sc = new Scanner(filename)) {
+    public void addPlayerToLeaderboard(Player player) { this.leaderboard.add(player); }
+
+    private List<Player> read() {
+        List<Player> players = new ArrayList<>();
+        try (Scanner sc = new Scanner(file)) {
             if (file.exists()) {
                 while (sc.hasNextLine()) {
-                    lb.add(sc.nextLine());
+                    String line = sc.nextLine();
+                    String[] split = line.split(" ");
+                    Player p = new Player(split[1], split[2].substring(1, split[2].length() - 1));
+                    players.add(p);
                 }
             }
         } catch (Exception e) {
             gui.displayMsg(e.getMessage());
         }
-        return lb;
+        return players;
     }
 
-    public void showLeaderboard() {
-        try (Scanner sc = new Scanner(filename)) {
+    public void show() {
+        gui.displayMsg("\nLEADERBOARD");
+        try (Scanner sc = new Scanner(file)) {
             if (file.exists()) {
                 while (sc.hasNextLine()) {
                     gui.displayMsg(sc.nextLine());
@@ -49,12 +51,16 @@ public class Leaderboard {
         } catch (Exception e) {
             gui.displayMsg(e.getMessage());
         }
+        gui.displayMsg("");
     }
 
-    public void writeLeaderboard() {
-        try (PrintWriter pw = new PrintWriter(filename)) {
+    public void write() {
+        Collections.sort(leaderboard);
+        try (FileWriter fw = new FileWriter(filename)) {
             if (file.exists()) {
-                // write to file
+                for (int i = 0; i < leaderboard.size(); i++) {
+                    fw.write(i + 1 + ". " + leaderboard.get(i).toString() + "\n");
+                }
             }
         } catch (Exception e) {
             gui.displayMsg(e.getMessage());

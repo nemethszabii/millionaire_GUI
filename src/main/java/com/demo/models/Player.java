@@ -1,16 +1,17 @@
 package com.demo.models;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
-public class Player {
+public class Player implements Comparable {
     private String name;
     private int prize;
     private int guaranteedPrize;
     private Map<Integer, Integer> prizes;
     private String[] availableHelps;
+    private String formattedElapsedTime;
+
+    public void setFormattedElapsedTime(String elapsedTime) { this.formattedElapsedTime = elapsedTime; }
 
     public String[] getAvailableHelps() { return availableHelps; }
 
@@ -34,6 +35,11 @@ public class Player {
         this.prize = 0;
         setUpPrizes();
         availableHelps = new String[] {"50:50", "Phone", "Audience"};
+    }
+
+    public Player(String name, String formattedElapsedTime) {
+        this.name = name;
+        this.formattedElapsedTime = formattedElapsedTime;
     }
 
     public void incrementPrize(int index) {
@@ -62,8 +68,35 @@ public class Player {
         this.prizes.put(15, 1000000);
     }
 
+    public static int getDataFromFormattedTime(String time, int start, int end) {
+        return Integer.parseInt(time.substring(start, end));
+    }
+
     @Override
     public String toString() {
-        return String.format("$%s: [%d]", name, prize);
+        return String.format("%s [%s]", this.name, this.formattedElapsedTime);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int min = Player.getDataFromFormattedTime(this.formattedElapsedTime, 0, 2);
+        int sec = Player.getDataFromFormattedTime(this.formattedElapsedTime, 3, 5);
+        Player p = (Player) o;
+        int pMin = Player.getDataFromFormattedTime(p.formattedElapsedTime, 0, 2);
+        int pSec = Player.getDataFromFormattedTime(p.formattedElapsedTime, 3, 5);
+
+        if (min == pMin) {
+            if (sec == pSec) {
+                return 0;
+            } else if (sec < pSec) {
+                return -1;
+            } else {
+                return 1;
+            }
+        } else if (min > pMin) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }

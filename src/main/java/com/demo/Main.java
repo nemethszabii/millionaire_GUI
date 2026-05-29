@@ -10,9 +10,10 @@ public class Main {
     static void main(String[] args) {
         GuiDisplay gui = new ConsoleGuiDisplay();
         Scanner sc = new Scanner(System.in);
-        String filename = "qna.txt";
+        String questionsFile = "qna.txt";
+        String leaderboardFile = "leaderboard.txt";
 
-        GameEngine gameEngine = new GameEngine(gui, sc, filename);
+        GameEngine gameEngine = new GameEngine(gui, sc, questionsFile, leaderboardFile);
         gameEngine.mainMenu();
 
         sc.close();

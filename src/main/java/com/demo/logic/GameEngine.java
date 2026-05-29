@@ -5,6 +5,7 @@ import com.demo.GUI.TerminalHandler;
 import com.demo.models.Player;
 import com.demo.models.Question;
 
+import java.sql.Time;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
@@ -17,11 +18,15 @@ public class GameEngine {
     private Player player;
     private String gameState;
     private Help help;
+    private Leaderboard leaderboard;
+    private Long startingTime;
+    private Long endTime;
 
-    public GameEngine(GuiDisplay gui, Scanner sc, String filename) {
+    public GameEngine(GuiDisplay gui, Scanner sc, String questionsFile, String leaderboardFile) {
         this.gui = gui;
         this.sc = sc;
-        this.gc = new GameContent(filename);
+        this.gc = new GameContent(questionsFile);
+        this.leaderboard = new Leaderboard(leaderboardFile, gui);
     }
 
     public void mainMenu() {
@@ -37,7 +42,7 @@ public class GameEngine {
                     runGame();
                     break;
                 case "2":
-                    showLeaderboard();
+                    leaderboard.show();
                     break;
                 case "3":
                     gui.displayMsg("Closing game...");
@@ -62,6 +67,7 @@ public class GameEngine {
         TreeMap<Integer, Question> qna = this.gc.getQna();
         int i = 0;
         String userAnswer = "";
+        this.startingTime = System.nanoTime();
         while (i < qna.size()) {
             boolean isCorrect = false;
             TreeMap<String, String> shuffledOptions = this.gc.getShuffledOptions();
@@ -96,6 +102,7 @@ public class GameEngine {
                 i = qna.size();
             }
         }
+        this.endTime = System.nanoTime();
         handleEndOfGame();
     }
 
@@ -122,6 +129,12 @@ public class GameEngine {
             case "play":
                 gui.displayMsg("Congrats! You win the millionaire game!");
                 gui.displayMsg("Your prize is: $" + player.getPrize());
+
+                String elapsedTime = formatElapsedTime();
+                this.player.setFormattedElapsedTime(elapsedTime);
+                this.leaderboard.addPlayerToLeaderboard(this.player);
+
+                this.leaderboard.write();
                 break;
             case "quit":
                 gui.displayMsg("You have chosen to quit the game!");
@@ -158,10 +171,6 @@ public class GameEngine {
         return answer;
     }
 
-    private void showLeaderboard() {
-        gui.displayMsg("Leaderboard");
-    }
-
     private void getPlayerName() {
         displayRules();
         String name;
@@ -183,6 +192,13 @@ public class GameEngine {
                 - If answer is correct, you gain score and move forward to the next question!
                 - You get a guaranteed prize after the 5., 10. and 15. question!
                 - Your result will be written to the leaderboard!
+                - Your name will be written to the leaderboard with the play time, but only if you win!
         """);
+    }
+
+    private String formatElapsedTime() {
+        int elapsedSec = (int)Math.floor(((this.endTime - this.startingTime) / Math.pow(10, 9)) % 60);
+        int elapsedMin = (int)Math.floor((((this.endTime - this.startingTime) / Math.pow(10, 9)) / 60) % 60);
+        return (elapsedMin > 10 ? String.valueOf(elapsedMin) : "0" + elapsedMin) + ":" + (elapsedSec > 10 ? String.valueOf(elapsedSec) : "0" + elapsedSec);
     }
 }
