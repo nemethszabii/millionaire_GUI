@@ -47,7 +47,26 @@ public class Help {
     }
 
     public void audience() {
-        gui.displayMsg("The audience has voted!");
+        List<Integer> votes = genAudienceVotes(4, 100);
+        gui.displayMsg("a: " + votes.get(0) + "% " + "b: " + votes.get(1) + "% " + "c: " + votes.get(2) + "% " + "d: " + votes.get(3) + "%");
+    }
+
+    private List<Integer> genAudienceVotes(int numberOfVotes, int sum) {
+        Random r = new Random();
+        TreeSet<Integer> set = new TreeSet<>();
+        while (set.size() < numberOfVotes - 1) {
+            set.add(r.nextInt(sum - 1) + 1);
+        }
+
+        List<Integer> cutList = new ArrayList<>(set);
+        cutList.add(0, 0);
+        cutList.add(sum);
+
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < cutList.size() - 1; i++) {
+            result.add(cutList.get(i + 1) - cutList.get(i));
+        }
+        return result;
     }
 
     public String helpMenu(TreeMap<String, String> shuffledOptions, String solutionKey) {
@@ -97,9 +116,9 @@ public class Help {
         String[] helps = this.player.getAvailableHelps();
         String[] newArray = new String[helps.length - 1];
         int counter = 0;
-        for (int i = 0; i < helps.length; i++) {
-            if (!helps[i].equals(chosenHelp)) {
-                newArray[counter] = helps[i];
+        for (String help : helps) {
+            if (!help.equals(chosenHelp)) {
+                newArray[counter] = help;
                 counter++;
             }
         }
