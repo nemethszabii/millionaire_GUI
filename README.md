@@ -13,7 +13,7 @@ The **logical\backend** part of the project is written in plain *Java*.
 
 ## Task List
 - [x] 🧱 Create basic Player, Question and Game Engine class
-- [ ] 🧑‍💻 Finish backend logic 
+- [x] 🧑‍💻 Finish backend logic 
 - [ ] 🎮 Start learning Swing 
 - [ ] 📖 After getting familiar with basic GUI, dive into JavaFX
 - [ ] 🎉 Finish project 
