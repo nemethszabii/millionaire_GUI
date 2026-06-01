@@ -2,6 +2,7 @@ package com.demo.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 
 public class MainMenu extends JFrame {
     JPanel titlePanel;
@@ -32,6 +33,8 @@ public class MainMenu extends JFrame {
         contentPanel.add(lbBtn);
         contentPanel.add(exitBtn);
 
+
+
         wrapperPanel.add(contentPanel);
 
         this.add(titlePanel, BorderLayout.NORTH);
@@ -49,26 +52,26 @@ public class MainMenu extends JFrame {
 
     private JPanel createTitlePanel() {
         JPanel p = new JPanel();
-        p.setPreferredSize(new Dimension(600, 200));
+        p.setPreferredSize(new Dimension(600, 100));
         p.setBackground(new Color(0, 96, 153));
-        p.setLayout(new GridLayout(1,1));
+        p.setLayout(null);
         return p;
     }
 
     private JLabel createMainTitle() {
         JLabel l = new JLabel("Who wants to be a millionaire?");
-        l.setVerticalTextPosition(JLabel.CENTER);
-        l.setHorizontalTextPosition(JLabel.CENTER);
         l.setFont(new Font("Arial", Font.BOLD, 35));
-        contentPanel.setOpaque(true);
+        l.setBounds(35, 0, 600, 100);
+        l.setForeground(Color.white);
         return l;
     }
 
     private JPanel createContentPanel() {
         JPanel contentPanel = new JPanel();
-        contentPanel.setPreferredSize(new Dimension(250, 150));
-        contentPanel.setBackground(new Color(0, 96, 153));
+        contentPanel.setPreferredSize(new Dimension(320, 220));
+        contentPanel.setBackground(new Color(0, 80, 153));
         contentPanel.setLayout(new GridLayout(3, 1, 15, 15));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         return contentPanel;
     }
 

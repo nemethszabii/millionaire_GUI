@@ -19,7 +19,7 @@ public class Main {
         String leaderboardFile = "leaderboard.txt";
 
         GameEngine gameEngine = new GameEngine(gui, sc, questionsFile, leaderboardFile);
-        gameEngine.mainMenu();
+        gameEngine.mainMenuConsole();
 
         sc.close();
     }

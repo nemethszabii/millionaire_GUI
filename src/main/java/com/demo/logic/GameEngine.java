@@ -29,7 +29,7 @@ public class GameEngine {
         this.leaderboard = new Leaderboard(leaderboardFile, gui);
     }
 
-    public void mainMenu() {
+    public void mainMenuConsole() {
         String choice = "";
         do {
             gui.displayMsg("1 - Start Game");
@@ -39,7 +39,7 @@ public class GameEngine {
             choice = sc.nextLine();
             switch (choice) {
                 case "1":
-                    runGame();
+                    preGameSetUps();
                     break;
                 case "2":
                     leaderboard.show();
@@ -55,7 +55,7 @@ public class GameEngine {
         } while (true);
     }
 
-    private void runGame() {
+    private void preGameSetUps() {
         TerminalHandler.clearConsole();
         this.player = new Player();
         this.help = new Help(gui, sc, player);
@@ -160,12 +160,9 @@ public class GameEngine {
 
     private String getPlayerAnswer(Set<String> answerOptions, boolean comingFromHelp) {
         String answer;
+        String msg = comingFromHelp ? "Please enter your choice [a, b, c, d] or quit [q]: " : "Choose an answer [a, b, c, d] or get help [h] or to quit [q]: ";
         do {
-            if (comingFromHelp) {
-                gui.displayInLineMsg("Please enter your choice [a, b, c, d] or quit [q]: ");
-            } else {
-                gui.displayInLineMsg("Choose an answer [a, b, c, d] or get help [h] or to quit [q]: ");
-            }
+            gui.displayInLineMsg(msg);
             answer = sc.nextLine();
         } while (!answerOptions.contains(answer));
         return answer;
