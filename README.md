@@ -5,14 +5,14 @@
 
 - I have already built a [similar project using C#](https://github.com/nemethszabii/who-wants-to-be-a-millionaire) but that one was my first ever programming project so it's obviously very 'raw'.
 - 🔨 With this project I wanted to make a better version of that one. 
-- 👨‍🎓 I am planning on **LEARNING** *Swing* basics while developing this project. 
+- 👨‍🎓 I am planning on **LEARNING** *Swing* and *JavaFX* basics while developing this project. 
 
  ### ⌨️ Initially, the project will be using only the terminal to communicate with the user.
 
 ## Task List
 - [x] 🧱 Create basic Player, Question and Game Engine class
 - [x] 🧑‍💻 Finish backend logic 
-- [x] 🎮 Start learning Swing 
+- [x] 🎮 Start learning Swing and JavaFX 
 - [ ] 📖 Make a GUI for this project
 - [ ] 🎉 Finish project
 
