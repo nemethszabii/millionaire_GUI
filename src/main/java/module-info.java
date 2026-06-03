@@ -5,4 +5,6 @@ module com.demo.hellofx {
 
     opens com.demo.gui to javafx.fxml;
     exports com.demo.gui;
+    exports com.demo.gui.controller;
+    opens com.demo.gui.controller to javafx.fxml;
 }

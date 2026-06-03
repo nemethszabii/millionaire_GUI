@@ -17,18 +17,16 @@ public class GuiApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/demo/gui/menu.fxml"));
-        Scene scene = new Scene(root, 600, 500);
-        String css = getClass().getResource("styles.css").toExternalForm();
-        scene.getStylesheets().add(css);
+        Parent menuRoot = FXMLLoader.load(getClass().getResource("/com/demo/gui/menu.fxml"));
+        Scene menuScene = new Scene(menuRoot, 600, 500);
 
         stage.setResizable(false);
 
         Image img = new Image(getClass().getResourceAsStream("/com/demo/gui/assets/main-icon.png"));
         stage.getIcons().add(img);
 
-        stage.setTitle("Demo App FX!");
-        stage.setScene(scene);
+        stage.setTitle("Who wants to be a millionaire?");
+        stage.setScene(menuScene);
         stage.show();
     }
 }

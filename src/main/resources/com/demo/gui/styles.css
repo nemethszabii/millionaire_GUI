@@ -23,3 +23,15 @@
 .button:hover {
     -fx-background-color: #232323;
 }
+
+.radio-button {
+    -fx-text-fill: white;
+}
+
+#submitBtn {
+    -fx-text-fill: #2fe12f;
+}
+
+#quitToMenuBtn {
+    -fx-text-fill: red;
+}
