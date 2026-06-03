@@ -1,0 +1,25 @@
+.root {
+    -fx-background-color: #3131b9;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.button {
+    -fx-pref-width: 250px;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-border: none;
+    -fx-background-color: #000000;
+    -fx-padding: 10px;
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #232323;
+}
