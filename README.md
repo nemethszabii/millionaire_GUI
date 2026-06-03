@@ -1,6 +1,6 @@
 # 💸 'Who wants to be a millionaire?' GUI project
 
-## This project showcases OOP, DSA, File Handling, Input Handling and many more.
+## This project showcases OOP, DSA, File Handling, Event Driven development and many more.
 ## 🖥️ This is my first project using Java Swing.
 
 - I have already built a [similar project using C#](https://github.com/nemethszabii/who-wants-to-be-a-millionaire) but that one was my first ever programming project so it's obviously very 'raw'.
