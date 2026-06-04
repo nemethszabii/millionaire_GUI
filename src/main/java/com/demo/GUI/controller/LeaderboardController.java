@@ -1,28 +1,17 @@
 package com.demo.gui.controller;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class InGameController {
-    @FXML
-    private Button quitBtn;
-    @FXML
-    private Button submitBtn;
-
+public class LeaderboardController {
     private Stage stage;
     private Scene scene;
-
-    public void submit(ActionEvent event) {
-        System.out.println("submit");
-    }
 
     public void backToMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/com/demo/gui/menu.fxml"));

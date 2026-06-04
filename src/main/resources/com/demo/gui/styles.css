@@ -28,10 +28,6 @@
     -fx-text-fill: white;
 }
 
-#submitBtn {
-    -fx-text-fill: #2fe12f;
-}
-
 #quitToMenuBtn {
     -fx-text-fill: red;
 }

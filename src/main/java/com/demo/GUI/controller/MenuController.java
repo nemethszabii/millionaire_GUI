@@ -27,15 +27,19 @@ public class MenuController {
     private Scene scene;
 
     public void startGame(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/demo/gui/inGame.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/demo/gui/details.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void showLeaderboard(ActionEvent event) {
-        System.out.println("Leaderboard");
+    public void showLeaderboard(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/com/demo/gui/leaderboard.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void quitGame() {
