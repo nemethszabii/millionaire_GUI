@@ -7,25 +7,67 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="500.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.demo.gui.controller.DetailsController">
    <children>
-      <VBox layoutX="31.0" layoutY="73.0" prefHeight="218.0" prefWidth="538.0" style="-fx-background-color: #1f1fab; -fx-border-color: #222222; -fx-border-width: 2;" />
       <Label layoutX="140.0" layoutY="14.0" text="Rules of the game">
          <font>
             <Font size="37.0" />
          </font>
       </Label>
-      <Label layoutX="88.0" layoutY="319.0" prefHeight="36.0" prefWidth="188.0" text="Username:">
+      <Label layoutX="140.0" layoutY="335.0" prefHeight="36.0" prefWidth="152.0" text="Username:">
          <font>
-            <Font size="30.0" />
+            <Font size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameLabel" layoutX="291.0" layoutY="319.0" prefHeight="36.0" prefWidth="188.0">
+      <TextField fx:id="usernameLabel" layoutX="300.0" layoutY="335.0" prefHeight="36.0" prefWidth="152.0">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <Button layoutX="166.0" layoutY="370.0" mnemonicParsing="false" onAction="#continueToGame" text="Continue" />
+      <Button fx:id="continueBtn" layoutX="217.0" layoutY="380.0" mnemonicParsing="false" onAction="#continueToGame" prefHeight="38.0" prefWidth="134.0" text="Continue" />
+      <VBox layoutX="20.0" layoutY="74.0" prefHeight="234.0" prefWidth="560.0" style="-fx-background-color: #1f1fab; -fx-border-color: #222222; -fx-border-width: 2;">
+         <children>
+            <Label layoutX="10.0" layoutY="132.0" prefHeight="30.0" prefWidth="621.0" text="- There are 15 questions.">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="621.0" text="- If answer is correct, move forward to the next question!">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="621.0" text="- You gain score with each correct answer!">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="72.0" prefHeight="30.0" prefWidth="621.0" text="- Guaranteed prizes after 5., 10. and 15. question!">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="104.0" prefHeight="30.0" prefWidth="621.0" text="- Upon win, result is written to the leaderboard!">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="41.0" prefHeight="30.0" prefWidth="621.0" text="- There are 3 options to help you!">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="164.0" prefHeight="30.0" prefWidth="621.0" text="- Each help is only available once per play!">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="164.0" prefHeight="30.0" prefWidth="555.0" text="- If your answer is incorrect, you lose!">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

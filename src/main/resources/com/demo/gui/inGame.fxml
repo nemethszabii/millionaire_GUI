@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.demo.gui.controller.InGameController">
    <children>
-      <VBox layoutX="10.0" layoutY="103.0" prefHeight="185.0" prefWidth="285.0" spacing="10.0" style="-fx-border-color: #222222; -fx-border-width: 2; -fx-background-color: #1f1fab;">
+      <VBox layoutX="10.0" layoutY="50.0" prefHeight="185.0" prefWidth="285.0" spacing="10.0" style="-fx-border-color: #222222; -fx-border-width: 2; -fx-background-color: #1f1fab;">
          <children>
             <RadioButton fx:id="choice1" mnemonicParsing="false" text="RadioButton">
                <toggleGroup>
@@ -51,20 +51,20 @@
             </RadioButton>
          </children>
       </VBox>
-      <ListView layoutX="10.0" layoutY="296.0" prefHeight="58.0" prefWidth="576.0" style="-fx-background-color: #1f1fab; -fx-border-color: #222222; -fx-border-width: 2;" />
-      <Label layoutX="198.0" layoutY="296.0" prefHeight="30.0" prefWidth="200.0" text="Available helps">
+      <ListView fx:id="helpsListView" layoutX="10.0" layoutY="250.0" prefHeight="60.0" prefWidth="576.0" style="-fx-background-color: #1f1fab; -fx-border-color: #222222; -fx-border-width: 2;" />
+      <Label fx:id="helpLabel" layoutX="196.0" layoutY="251.0" prefHeight="30.0" prefWidth="200.0" text="Available helps">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
       <Button fx:id="quitToMenuBtn" layoutX="337.0" layoutY="434.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="52.0" prefWidth="223.0" text="Quit" textFill="RED" />
-      <Label layoutX="10.0" layoutY="367.0" prefHeight="46.0" prefWidth="576.0" style="-fx-background-color: #1f1fab; -fx-border-color: #222222; -fx-border-width: 2;" text="Help display">
+      <Label fx:id="helpDisplayLabel" layoutX="10.0" layoutY="354.0" prefHeight="67.0" prefWidth="576.0" style="-fx-background-color: #1f1fab; -fx-border-color: #222222; -fx-border-width: 2;" text="Help display" visible="false">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Button fx:id="submitBtn" layoutX="14.0" layoutY="434.0" mnemonicParsing="false" onAction="#submit" style="-fx-text-fill: #3131b9;" text="Submit" />
-      <RadioButton contentDisplay="CENTER" layoutX="28.0" layoutY="318.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" text="50:50" textAlignment="CENTER">
+      <Button fx:id="submitBtn" layoutX="10.0" layoutY="434.0" mnemonicParsing="false" onAction="#submit" style="-fx-text-fill: #3131b9;" text="Submit" />
+      <RadioButton fx:id="fiftyRadioBtn" contentDisplay="CENTER" layoutX="34.0" layoutY="273.0" mnemonicParsing="false" onAction="#enableShowResultBtn" prefHeight="26.0" prefWidth="89.0" text="50:50" textAlignment="CENTER">
          <font>
             <Font size="17.0" />
          </font>
@@ -75,7 +75,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </RadioButton>
-      <RadioButton contentDisplay="CENTER" layoutX="239.0" layoutY="318.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Phone" textAlignment="CENTER" toggleGroup="$helpGroup">
+      <RadioButton fx:id="phoneRadioBtn" contentDisplay="CENTER" layoutX="245.0" layoutY="273.0" mnemonicParsing="false" onAction="#enableShowResultBtn" prefHeight="26.0" prefWidth="97.0" text="Phone" textAlignment="CENTER" toggleGroup="$helpGroup">
          <font>
             <Font size="17.0" />
          </font>
@@ -83,7 +83,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </RadioButton>
-      <RadioButton contentDisplay="CENTER" layoutX="432.0" layoutY="318.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" text="Audience" textAlignment="CENTER" toggleGroup="$helpGroup">
+      <RadioButton fx:id="audienceRadioBtn" contentDisplay="CENTER" layoutX="438.0" layoutY="273.0" mnemonicParsing="false" onAction="#enableShowResultBtn" prefHeight="26.0" prefWidth="115.0" text="Audience" textAlignment="CENTER" toggleGroup="$helpGroup">
          <font>
             <Font size="17.0" />
          </font>
@@ -91,29 +91,40 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </RadioButton>
-      <Label layoutX="10.0" layoutY="54.0" prefHeight="36.0" prefWidth="591.0" text="Question">
+      <Label fx:id="questionLabel" layoutX="4.0" layoutY="6.0" prefHeight="36.0" prefWidth="591.0" text="Question">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <VBox layoutX="300.0" layoutY="103.0" prefHeight="185.0" prefWidth="285.0" spacing="10.0" style="-fx-border-color: #222222; -fx-border-width: 2; -fx-background-color: #1f1fab;">
+      <VBox layoutX="300.0" layoutY="50.0" prefHeight="185.0" prefWidth="285.0" spacing="10.0" style="-fx-border-color: #222222; -fx-border-width: 2; -fx-background-color: #1f1fab;">
          <children>
-            <Label text=" Score: $">
+            <Label text="Score: $">
                <font>
                   <Font size="20.0" />
                </font>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
             </Label>
             <Label text="Secure Score: $">
                <font>
                   <Font size="20.0" />
                </font>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
             </Label>
             <Label layoutX="12.0" layoutY="46.0" text="Next Score: $">
                <font>
                   <Font size="20.0" />
                </font>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
             </Label>
          </children>
       </VBox>
+      <Button fx:id="showHelpResultBtn" disable="true" layoutX="10.0" layoutY="315.0" mnemonicParsing="false" onAction="#showHelpResult" prefHeight="52.0" prefWidth="180.0" text="Show Result" />
+      <Button fx:id="resetHelpsBtn" disable="true" layoutX="486.0" layoutY="315.0" mnemonicParsing="false" onAction="#resetHelps" prefHeight="52.0" prefWidth="180.0" text="Reset" />
    </children>
 </AnchorPane>

@@ -31,3 +31,27 @@
 #quitToMenuBtn {
     -fx-text-fill: red;
 }
+
+#showHelpResultBtn {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 15px;
+    -fx-padding: 3px;
+    -fx-text-fill: #3131b9;
+}
+
+#resetHelpsBtn {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 15px;
+    -fx-padding: 3px;
+    -fx-text-fill: #3131b9;
+}
+
+#continueBtn {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 25px;
+    -fx-padding: 3px;
+    -fx-text-fill: #3131b9;
+}

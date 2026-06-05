@@ -27,11 +27,8 @@ public class Player implements Comparable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Player() {
+    public Player(String username) {
+        this.name = username;
         this.prize = 0;
         setUpPrizes();
         availableHelps = new String[] {"50:50", "Phone", "Audience"};

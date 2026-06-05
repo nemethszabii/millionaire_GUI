@@ -5,7 +5,6 @@ import com.demo.core.model.Player;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.*;
 
 public class Leaderboard {
@@ -14,10 +13,9 @@ public class Leaderboard {
     private GuiDisplay gui;
     private List<Player> leaderboard;
 
-    public Leaderboard(String filename, GuiDisplay gui) {
+    public Leaderboard(String filename) {
         this.filename = filename;
         this.file = new File(filename);
-        this.gui = gui;
         this.leaderboard = read();
     }
 
@@ -35,7 +33,7 @@ public class Leaderboard {
                 }
             }
         } catch (Exception e) {
-            gui.displayMsg(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return players;
     }

@@ -52,14 +52,8 @@ public class GameContent {
         gui.displayMsg("Guaranteed prize: $" + player.getGuaranteedPrize());
         gui.displayMsg(question);
         buildShuffledOptions(i);
-        displayAnswers(gui);
     }
 
-    private void displayAnswers(GuiDisplay gui) {
-        for (String key : shuffledOptions.keySet()) {
-            gui.displayMsg(key + ": " + shuffledOptions.get(key));
-        }
-    }
 
     private void buildShuffledOptions(int i) {
         List<String> availableOptions = new ArrayList<>();
