@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Player implements Comparable {
+    private int rank;
     private String name;
     private int prize;
     private int guaranteedPrize;
@@ -21,21 +22,25 @@ public class Player implements Comparable {
         return guaranteedPrize;
     }
 
-    public int getPrize() { return prize; }
-
+    public int getRank() { return rank; }
     public String getName() {
         return name;
     }
+    public int getPrize() { return prize; }
+    public String getTime() { return formattedElapsedTime; }
 
-    public Player(String username) {
-        this.name = username;
+    public void setName(String name) { this.name = name; }
+
+    public Player() {
         this.prize = 0;
         setUpPrizes();
         availableHelps = new String[] {"50:50", "Phone", "Audience"};
     }
 
-    public Player(String name, String formattedElapsedTime) {
+    public Player(String rank, String name, String prize, String formattedElapsedTime) {
+        this.rank = Integer.parseInt(rank);
         this.name = name;
+        this.prize = Integer.parseInt(prize);
         this.formattedElapsedTime = formattedElapsedTime;
     }
 
@@ -71,7 +76,7 @@ public class Player implements Comparable {
 
     @Override
     public String toString() {
-        return String.format("%s [%s]", this.name, this.formattedElapsedTime);
+        return String.format("%s (%d) [%s]", this.name, this.prize, this.formattedElapsedTime);
     }
 
     @Override

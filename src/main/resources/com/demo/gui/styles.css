@@ -55,3 +55,25 @@
     -fx-padding: 3px;
     -fx-text-fill: #3131b9;
 }
+
+#playerTableView {
+    -fx-background-color: #333333;
+    -fx-text-fill: white;
+}
+
+#playerTableView .column-header-background {
+    -fx-background-color: #1a2536;
+}
+
+#playerTableView .column-header {
+    -fx-background-color: #1a2536; /* Match the background bar */
+    -fx-border-color: #2e3d52;     /* Optional: subtle borders between columns */
+    -fx-border-width: 0 1 0 0;     /* Border only on the right side of columns */
+}
+
+#playerTableView .column-header .label {
+    -fx-text-fill: white;        /* Classic millionaire gold text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;         /* Centers the text inside the header */
+}

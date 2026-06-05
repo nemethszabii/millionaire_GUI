@@ -1,7 +1,9 @@
 module com.demo.hellofx {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
+    opens com.demo.core.model to javafx.base;
 
     opens com.demo.gui to javafx.fxml;
     exports com.demo.gui;

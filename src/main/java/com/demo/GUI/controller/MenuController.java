@@ -1,6 +1,9 @@
 package com.demo.gui.controller;
 
+import com.demo.core.logic.GameEngine;
+import com.demo.core.logic.Leaderboard;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -25,9 +30,17 @@ public class MenuController {
     private Button quitBtn;
     private Stage stage;
     private Scene scene;
+    private GameEngine gameEngine;
+    private Leaderboard leaderboard;
+
+    public MenuController() {
+        this.gameEngine = new GameEngine();
+        this.leaderboard = this.gameEngine.getLeaderboard();
+    }
 
     public void startGame(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/demo/gui/details.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/demo/gui/details.fxml"));
+        Parent root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -35,7 +48,10 @@ public class MenuController {
     }
 
     public void showLeaderboard(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/demo/gui/leaderboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/demo/gui/leaderboard.fxml"));
+        Parent root = loader.load();
+        LeaderboardController leaderboardController = loader.getController();
+        leaderboardController.setLeaderboard(leaderboard);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

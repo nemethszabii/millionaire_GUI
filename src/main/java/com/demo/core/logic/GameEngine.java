@@ -17,18 +17,22 @@ public class GameEngine {
     private Long startingTime;
     private Long endTime;
 
-    public GameEngine(String username) {
+    public GameEngine() {
         File qnaFile = new File("src/main/resources/com/demo/gui/files/qna.txt");
         File leaderboardFile = new File("src/main/resources/com/demo/gui/files/leaderboard.txt");
         this.gameContent = new GameContent(qnaFile.getPath());
         this.leaderboard = new Leaderboard(leaderboardFile.getPath());
-        this.player = new Player(username);
+        this.player = new Player();
         this.help = new Help(player);
     }
+
+    public Leaderboard getLeaderboard() { return this.leaderboard; }
 
     public String getPlayerName() {
         return this.player.getName();
     }
+
+    public void setPlayerName(String name) { this.player.setName(name); }
 
 //    private void inGameLogic() {
 //        TreeMap<Integer, Question> qna = this.gc.getQna();

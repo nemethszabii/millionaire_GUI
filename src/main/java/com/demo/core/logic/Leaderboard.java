@@ -19,6 +19,8 @@ public class Leaderboard {
         this.leaderboard = read();
     }
 
+    public List<Player> getLeaderboard() { return this.leaderboard; }
+
     public void addPlayerToLeaderboard(Player player) { this.leaderboard.add(player); }
 
     private List<Player> read() {
@@ -28,7 +30,12 @@ public class Leaderboard {
                 while (sc.hasNextLine()) {
                     String line = sc.nextLine();
                     String[] split = line.split(" ");
-                    Player p = new Player(split[1], split[2].substring(1, split[2].length() - 1));
+                    Player p = new Player(
+                            String.valueOf(split[0].charAt(0)),
+                            split[1],
+                            split[2].substring(1, split[2].length() - 1),
+                            split[3].substring(1, split[3].length() - 1)
+                    );
                     players.add(p);
                 }
             }
