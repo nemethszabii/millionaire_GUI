@@ -2,6 +2,7 @@ package com.demo.core.logic;
 
 import com.demo.console.GuiDisplay;
 import com.demo.core.model.Player;
+import com.demo.core.model.Question;
 
 import java.io.File;
 import java.util.Scanner;
@@ -16,8 +17,10 @@ public class GameEngine {
     private Leaderboard leaderboard;
     private Long startingTime;
     private Long endTime;
+    private byte questionCounter;
 
     public GameEngine() {
+        this.questionCounter = 0;
         File qnaFile = new File("src/main/resources/com/demo/gui/files/qna.txt");
         File leaderboardFile = new File("src/main/resources/com/demo/gui/files/leaderboard.txt");
         this.gameContent = new GameContent(qnaFile.getPath());
@@ -75,6 +78,16 @@ public class GameEngine {
 //        this.endTime = System.nanoTime();
 //        handleEndOfGame();
 //    }
+
+    public Question getCurrentQuestionObject() {
+        TreeMap<Integer, Question> qna = this.gameContent.getQna();
+        return qna.get(this.questionCounter);
+    }
+
+    public TreeMap<String, String> shuffledOptions() {
+        TreeMap<String, String> shuffledOptions = this.gameContent.getShuffledOptions();
+
+    }
 
     private boolean evaluatePlayerAnswer(TreeMap<String, String> shuffledOptions, String userAnswer, int i) {
         if (userAnswer.equals("q")) {

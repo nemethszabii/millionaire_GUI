@@ -64,7 +64,7 @@
          </font>
       </Label>
       <Button fx:id="submitBtn" layoutX="10.0" layoutY="434.0" mnemonicParsing="false" onAction="#submit" style="-fx-text-fill: #3131b9;" text="Submit" />
-      <RadioButton fx:id="fiftyRadioBtn" contentDisplay="CENTER" layoutX="34.0" layoutY="273.0" mnemonicParsing="false" onAction="#enableShowResultBtn" prefHeight="26.0" prefWidth="89.0" text="50:50" textAlignment="CENTER">
+      <RadioButton fx:id="fiftyRadioBtn" contentDisplay="CENTER" layoutX="34.0" layoutY="273.0" mnemonicParsing="false" onAction="#enableHelpActionButtons" prefHeight="26.0" prefWidth="89.0" text="50:50" textAlignment="CENTER">
          <font>
             <Font size="17.0" />
          </font>
@@ -75,7 +75,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </RadioButton>
-      <RadioButton fx:id="phoneRadioBtn" contentDisplay="CENTER" layoutX="245.0" layoutY="273.0" mnemonicParsing="false" onAction="#enableShowResultBtn" prefHeight="26.0" prefWidth="97.0" text="Phone" textAlignment="CENTER" toggleGroup="$helpGroup">
+      <RadioButton fx:id="phoneRadioBtn" contentDisplay="CENTER" layoutX="245.0" layoutY="273.0" mnemonicParsing="false" onAction="#enableHelpActionButtons" prefHeight="26.0" prefWidth="97.0" text="Phone" textAlignment="CENTER" toggleGroup="$helpGroup">
          <font>
             <Font size="17.0" />
          </font>
@@ -83,7 +83,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </RadioButton>
-      <RadioButton fx:id="audienceRadioBtn" contentDisplay="CENTER" layoutX="438.0" layoutY="273.0" mnemonicParsing="false" onAction="#enableShowResultBtn" prefHeight="26.0" prefWidth="115.0" text="Audience" textAlignment="CENTER" toggleGroup="$helpGroup">
+      <RadioButton fx:id="audienceRadioBtn" contentDisplay="CENTER" layoutX="438.0" layoutY="273.0" mnemonicParsing="false" onAction="#enableHelpActionButtons" prefHeight="26.0" prefWidth="115.0" text="Audience" textAlignment="CENTER" toggleGroup="$helpGroup">
          <font>
             <Font size="17.0" />
          </font>

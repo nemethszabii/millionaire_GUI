@@ -84,10 +84,11 @@ public class InGameController implements Initializable {
             helpDisplayLabel.setText("You have used up all of the available helps!");
             helpLabel.setVisible(false);
         }
+        resetHelpsBtn.setDisable(true);
         showHelpResultBtn.setDisable(true);
     }
 
-    public void enableShowResultBtn() {
+    public void enableHelpActionButtons() {
         resetHelpsBtn.setDisable(false);
         showHelpResultBtn.setDisable(false);
     }

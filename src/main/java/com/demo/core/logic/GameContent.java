@@ -14,7 +14,6 @@ public class GameContent {
     public TreeMap<Integer, Question> getQna() {
         return qna;
     }
-
     public TreeMap<String, String> getShuffledOptions() { return shuffledOptions; }
 
     public GameContent(String qnaFile) {
@@ -53,7 +52,6 @@ public class GameContent {
         gui.displayMsg(question);
         buildShuffledOptions(i);
     }
-
 
     private void buildShuffledOptions(int i) {
         List<String> availableOptions = new ArrayList<>();
