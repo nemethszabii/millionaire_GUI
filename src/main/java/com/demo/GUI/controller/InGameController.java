@@ -1,7 +1,9 @@
 package com.demo.gui.controller;
 
 import com.demo.core.logic.GameEngine;
+import com.demo.core.model.Question;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,15 +13,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class InGameController implements Initializable {
+public class InGameController {
     private Stage stage;
     private Scene scene;
     private GameEngine gameEngine;
+    private Question currentQuestion;
     private byte usedHelpsCounter = 0;
     @FXML
     private Label helpDisplayLabel;
@@ -39,14 +42,50 @@ public class InGameController implements Initializable {
     private Label questionLabel;
     @FXML
     private Button resetHelpsBtn;
+    @FXML
+    private ToggleGroup choiceGroup;
+    @FXML
+    private RadioButton choice1;
+    @FXML
+    private RadioButton choice2;
+    @FXML
+    private RadioButton choice3;
+    @FXML
+    private RadioButton choice4;
 
     public void setGameEngine(GameEngine sharedGameEngine) {
         this.gameEngine = sharedGameEngine;
-        this.questionLabel.setText(this.gameEngine.getPlayerName());
+        this.currentQuestion = gameEngine.getCurrentQuestionObj();
+        setUpInGameContent();
     }
 
-    public void submit() {
-        System.out.println("submit");
+    private void setUpInGameContent() {
+        this.questionLabel.setText(this.currentQuestion.getQuestion());
+        List<String> choices = this.currentQuestion.getRandomOrderedAnswers();
+        this.choice1.setText(choices.get(0));
+        this.choice2.setText(choices.get(1));
+        this.choice3.setText(choices.get(2));
+        this.choice4.setText(choices.get(3));
+    }
+
+    public void onSubmit(ActionEvent event) throws IOException {
+        RadioButton selected = (RadioButton)choiceGroup.getSelectedToggle();
+        String val = selected.getText();
+        if (this.currentQuestion.getAnswer().equals(val)) {
+            this.gameEngine.incrementQuestionCounter();
+            this.currentQuestion = this.gameEngine.getCurrentQuestionObj();
+            setUpInGameContent();
+        } else {
+            handleLose(event);
+        }
+    }
+
+    private void handleLose(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("GAME OVER");
+        alert.setHeaderText("Your answer is wrong!");
+        alert.setContentText("You are being redirected to the menu.");
+        redirectToMenu(event, alert);
     }
 
     public void backToMenu(ActionEvent event) throws IOException {
@@ -54,6 +93,10 @@ public class InGameController implements Initializable {
         alert.setTitle("Confirmation");
         alert.setHeaderText("Quit Game");
         alert.setContentText("Are you sure you want to quit the game?\nGame progress will be lost.");
+        redirectToMenu(event, alert);
+    }
+
+    private void redirectToMenu(Event event, Alert alert) throws IOException {
         if (alert.showAndWait().get() == ButtonType.OK) {
             Parent root = FXMLLoader.load(getClass().getResource("/com/demo/gui/menu.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -99,10 +142,5 @@ public class InGameController implements Initializable {
         phoneRadioBtn.setSelected(false);
         fiftyRadioBtn.setSelected(false);
         showHelpResultBtn.setDisable(true);
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 }

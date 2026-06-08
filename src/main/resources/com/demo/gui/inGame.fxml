@@ -63,7 +63,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Button fx:id="submitBtn" layoutX="10.0" layoutY="434.0" mnemonicParsing="false" onAction="#submit" style="-fx-text-fill: #3131b9;" text="Submit" />
+      <Button fx:id="submitBtn" layoutX="10.0" layoutY="434.0" mnemonicParsing="false" onAction="#onSubmit" style="-fx-text-fill: #3131b9;" text="Submit" />
       <RadioButton fx:id="fiftyRadioBtn" contentDisplay="CENTER" layoutX="34.0" layoutY="273.0" mnemonicParsing="false" onAction="#enableHelpActionButtons" prefHeight="26.0" prefWidth="89.0" text="50:50" textAlignment="CENTER">
          <font>
             <Font size="17.0" />

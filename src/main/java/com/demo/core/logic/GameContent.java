@@ -9,12 +9,10 @@ import java.util.*;
 
 public class GameContent {
     private TreeMap<Integer, Question> qna = new TreeMap<>();
-    private TreeMap<String, String> shuffledOptions = new TreeMap<>();
 
     public TreeMap<Integer, Question> getQna() {
         return qna;
     }
-    public TreeMap<String, String> getShuffledOptions() { return shuffledOptions; }
 
     public GameContent(String qnaFile) {
         readInGameContent(qnaFile);
@@ -28,66 +26,46 @@ public class GameContent {
                 while (sc.hasNextLine()) {
                     String line = sc.nextLine();
                     String[] splitLine = line.split("#");
-                    String question = splitLine[0];
+                    String question = i + 1 + ". " + splitLine[0];
                     String answer = splitLine[1];
-                    String[] dummies = Arrays.copyOfRange(splitLine, 2, splitLine.length);
-                    qna.put(i, new Question(question, answer, dummies));
+                    List<String> allAnswersList = buildAnswerOptionsList(Arrays.copyOfRange(splitLine, 1, splitLine.length));
+                    List<String> randomOrderedAnswers = buildShuffledOptions(allAnswersList);
+                    qna.put(i, new Question(question, answer, randomOrderedAnswers));
                     i++;
                 }
             } else {
                 System.out.println("File " + inputFile + " does not exist.");
             }
         } catch (Exception ex) {
-            System.out.println("Error: " + ex.getMessage());
+            System.out.println("Error: " + ex);
         }
     }
 
-    public void displayQuestion(GuiDisplay gui, int i, Player player) {
-        String question = qna.get(i).getContent();
-        String answer = qna.get(i).getAnswer();
-        String[] dummies = qna.get(i).getDummies();
-        gui.displayMsg(i + 1 + ". question");
-        gui.displayMsg("Prize: $" + player.getPrize());
-        gui.displayMsg("Guaranteed prize: $" + player.getGuaranteedPrize());
-        gui.displayMsg(question);
-        buildShuffledOptions(i);
+    private List<String> buildAnswerOptionsList(String[] arr) {
+        List<String> options = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            options.add(arr[i]);
+        }
+        return options;
     }
 
-    private void buildShuffledOptions(int i) {
-        List<String> availableOptions = new ArrayList<>();
-        availableOptions.add(qna.get(i).getAnswer());
-        availableOptions.add(qna.get(i).getDummies()[0]);
-        availableOptions.add(qna.get(i).getDummies()[1]);
-        availableOptions.add(qna.get(i).getDummies()[2]);
-        List<String> availableChars = new ArrayList<>();
-        availableChars.add("a");
-        availableChars.add("b");
-        availableChars.add("c");
-        availableChars.add("d");
+    private List<String> buildShuffledOptions(List<String> availableOptions) {
+        int size = availableOptions.size();
+        List<String> shuffledOptions = new ArrayList<>();
         int j = 0;
-        while (j < 4) {
+        while (j < size) {
             String option = getRandomOption(availableOptions);
-            String charKey = getRandomOption(availableChars);
-            shuffledOptions.put(charKey, option);
+            shuffledOptions.add(option);
             j++;
         }
+        return shuffledOptions;
     }
 
     public static String getRandomOption(List<String> availableOptions) {
         Random rand = new Random();
         int index = rand.nextInt(availableOptions.size());
         String option = availableOptions.get(index);
-        availableOptions.remove(option);
+        availableOptions.remove(index);
         return option;
-    }
-
-    public String getKeyFromValue(int i) {
-        String answer = qna.get(i).getAnswer();
-        for (Map.Entry<String, String> entry : shuffledOptions.entrySet()) {
-            if (entry.getValue().equals(answer)) {
-                return entry.getKey();
-            }
-        };
-        return "";
     }
 }

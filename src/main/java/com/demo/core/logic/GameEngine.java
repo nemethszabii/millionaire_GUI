@@ -17,7 +17,7 @@ public class GameEngine {
     private Leaderboard leaderboard;
     private Long startingTime;
     private Long endTime;
-    private byte questionCounter;
+    private int questionCounter;
 
     public GameEngine() {
         this.questionCounter = 0;
@@ -79,14 +79,11 @@ public class GameEngine {
 //        handleEndOfGame();
 //    }
 
-    public Question getCurrentQuestionObject() {
+    public void incrementQuestionCounter() { this.questionCounter++; }
+
+    public Question getCurrentQuestionObj() {
         TreeMap<Integer, Question> qna = this.gameContent.getQna();
         return qna.get(this.questionCounter);
-    }
-
-    public TreeMap<String, String> shuffledOptions() {
-        TreeMap<String, String> shuffledOptions = this.gameContent.getShuffledOptions();
-
     }
 
     private boolean evaluatePlayerAnswer(TreeMap<String, String> shuffledOptions, String userAnswer, int i) {

@@ -1,26 +1,27 @@
 package com.demo.core.model;
 
+import java.util.List;
+import java.util.TreeMap;
+
 public class Question {
-    private String content;
+    private String question;
     private String answer;
-    private String[] dummies;
+    private List<String> getRandomOrderedAnswers;
 
-    public String[] getDummies() {
-        return dummies;
-    }
+    public List<String> getRandomOrderedAnswers() { return getRandomOrderedAnswers; }
 
-    public String getContent() {
-        return content;
+    public String getQuestion() {
+        return question;
     }
 
     public String getAnswer() {
         return answer;
     }
 
-    public Question(String content, String answer, String[] dummies) {
-        this.content = content;
+    public Question(String question, String answer, List<String> getRandomOrderedAnswers) {
+        this.question = question;
         this.answer = answer;
-        this.dummies = dummies;
+        this.getRandomOrderedAnswers = getRandomOrderedAnswers;
     }
 
     public Question() {
