@@ -1,14 +1,11 @@
 package com.demo.core.logic;
 
-import com.demo.console.GuiDisplay;
-import com.demo.core.model.Player;
 import com.demo.core.model.Question;
 
 import java.io.File;
 import java.util.*;
 
 public class GameContent {
-    //private final TreeMap<Integer, Question> qna = new TreeMap<>();
     private final List<Question> qna = new ArrayList<>();
 
     public List<Question> getQna() {

@@ -49,7 +49,6 @@ public class InGameController {
 
     private void setUpInGameContent() {
         this.player.startTimer();
-        this.helpDisplayLbl.setVisible(false);
         this.questionLbl.setText(this.gameEngine.getQuestionCounter() + 1 + ". " + this.currentQuestion.getQuestion());
         List<String> choices = this.currentQuestion.getRandomOrderedAnswers();
 
@@ -79,6 +78,7 @@ public class InGameController {
         showHelpResultBtn.setVisible(false);
         helpDisplayLbl.setLayoutY(helpDisplayLbl.getLayoutY() - 110);
         helpDisplayLbl.setText("You have used up all of the available helps!");
+        helpDisplayLbl.setVisible(true);
         helpLbl.setVisible(false);
         this.usedHelpsCounter = 0;
     }

@@ -5,6 +5,7 @@ import com.demo.core.model.Question;
 import java.util.*;
 
 public class Help {
+    private byte answerIndexAfterFiftyUse;
 
     public String[] fiftyFifty(Question currentQuestion) {
         String[] optionsAfter = new String[2];
@@ -19,9 +20,11 @@ public class Help {
         if (rand == 0) {
             optionsAfter[0] = rndOption;
             optionsAfter[1] = currentQuestion.getAnswer();
+            this.answerIndexAfterFiftyUse = 1;
         } else {
             optionsAfter[0] = currentQuestion.getAnswer();
             optionsAfter[1] = rndOption;
+            this.answerIndexAfterFiftyUse = 0;
         }
 
         return optionsAfter;
@@ -49,7 +52,12 @@ public class Help {
 
     private void associateAnswerWithHighestVote(Question currentQuestion, int[] votes) {
         int maxValIdx = getMaxValIndex(votes);
-        int answerIndex = currentQuestion.getRandomOrderedAnswers().indexOf(currentQuestion.getAnswer());
+        int answerIndex = -1;
+        if (votes.length == 4) {
+            answerIndex = currentQuestion.getRandomOrderedAnswers().indexOf(currentQuestion.getAnswer());
+        } else {
+            answerIndex = answerIndexAfterFiftyUse;
+        }
 
         int tmp = votes[maxValIdx];
         votes[maxValIdx] = votes[answerIndex];
