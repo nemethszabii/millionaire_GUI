@@ -1,6 +1,5 @@
 package com.demo.core.logic;
 
-import com.demo.console.GuiDisplay;
 import com.demo.core.model.Player;
 
 import java.io.File;

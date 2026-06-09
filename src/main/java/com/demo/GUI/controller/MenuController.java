@@ -23,11 +23,7 @@ public class MenuController {
     @FXML
     private AnchorPane menuPane;
     @FXML
-    private Button startBtn;
-    @FXML
-    private Button leaderboardBtn;
-    @FXML
-    private Button quitBtn;
+    private Button startBtn, leaderboardBtn, quitBtn;
     private Stage stage;
     private Scene scene;
     private GameEngine gameEngine;

@@ -5,16 +5,15 @@ import com.demo.core.model.Question;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class GameEngine {
     private final GameContent gameContent;
     private Player player;
-    private String gameState;
     private Help help;
     private Leaderboard leaderboard;
-    private Long startingTime, endTime;
     private int questionCounter;
     private Map<Integer, String> prizes;
 
@@ -29,15 +28,14 @@ public class GameEngine {
         setUpPrizes();
     }
 
+    public int getQuestionCounter() { return this.questionCounter; }
+
     public Player getPlayer() { return this.player; }
-    public String getPlayerName() {
-        return this.player.getName();
-    }
 
     public Leaderboard getLeaderboard() { return this.leaderboard; }
 
     public Question getCurrentQuestionObj() {
-        TreeMap<Integer, Question> qna = this.gameContent.getQna();
+        List<Question> qna = this.gameContent.getQna();
         return qna.get(this.questionCounter);
     }
 
@@ -70,11 +68,5 @@ public class GameEngine {
         this.prizes.put(13, "$250,000");
         this.prizes.put(14, "$500,000");
         this.prizes.put(15, "$1,000,000");
-    }
-
-    private String formatElapsedTime() {
-        int elapsedSec = (int)Math.floor(((this.endTime - this.startingTime) / Math.pow(10, 9)) % 60);
-        int elapsedMin = (int)Math.floor((((this.endTime - this.startingTime) / Math.pow(10, 9)) / 60) % 60);
-        return (elapsedMin > 10 ? String.valueOf(elapsedMin) : "0" + elapsedMin) + ":" + (elapsedSec > 10 ? String.valueOf(elapsedSec) : "0" + elapsedSec);
     }
 }

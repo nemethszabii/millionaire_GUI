@@ -5,12 +5,6 @@ public class Player implements Comparable {
     private int rank;
     private long startTime, elapsedTime;
 
-    public String getFormattedElapsedTime() { return this.formattedElapsedTime; }
-
-    public int getRank() { return rank; }
-
-    public String getTime() { return formattedElapsedTime; }
-
     public String getName() {
         return name;
     }
@@ -26,8 +20,6 @@ public class Player implements Comparable {
 
     public String getNextPrize() { return nextPrize; }
     public void setNextPrize(String value) { this.nextPrize = value; }
-
-    public long getElapsedTime() { return this.elapsedTime; }
 
     public Player() {
         this.prize = "$0";

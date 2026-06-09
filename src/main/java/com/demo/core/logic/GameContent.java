@@ -8,9 +8,10 @@ import java.io.File;
 import java.util.*;
 
 public class GameContent {
-    private TreeMap<Integer, Question> qna = new TreeMap<>();
+    //private final TreeMap<Integer, Question> qna = new TreeMap<>();
+    private final List<Question> qna = new ArrayList<>();
 
-    public TreeMap<Integer, Question> getQna() {
+    public List<Question> getQna() {
         return qna;
     }
 
@@ -22,31 +23,23 @@ public class GameContent {
         File file = new File(inputFile);
         try (Scanner sc = new Scanner(file)) {
             if (file.exists()) {
-                int i = 0;
                 while (sc.hasNextLine()) {
                     String line = sc.nextLine();
                     String[] splitLine = line.split("#");
-                    String question = i + 1 + ". " + splitLine[0];
+                    String question = splitLine[0];
                     String answer = splitLine[1];
-                    List<String> allAnswersList = buildAnswerOptionsList(Arrays.copyOfRange(splitLine, 1, splitLine.length));
+                    List<String> allAnswersList = new ArrayList<>(Arrays
+                            .asList(Arrays.copyOfRange(splitLine, 1, splitLine.length)));
                     List<String> randomOrderedAnswers = buildShuffledOptions(allAnswersList);
-                    qna.put(i, new Question(question, answer, randomOrderedAnswers));
-                    i++;
+                    qna.add(new Question(question, answer, randomOrderedAnswers));
                 }
+                Collections.shuffle(qna);
             } else {
                 System.out.println("File " + inputFile + " does not exist.");
             }
         } catch (Exception ex) {
             System.out.println("Error: " + ex);
         }
-    }
-
-    private List<String> buildAnswerOptionsList(String[] arr) {
-        List<String> options = new ArrayList<>();
-        for (int i = 0; i < arr.length; i++) {
-            options.add(arr[i]);
-        }
-        return options;
     }
 
     private List<String> buildShuffledOptions(List<String> availableOptions) {

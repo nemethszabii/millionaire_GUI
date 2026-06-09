@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class InGameController {
     private Stage stage;
@@ -49,7 +50,7 @@ public class InGameController {
     private void setUpInGameContent() {
         this.player.startTimer();
         this.helpDisplayLbl.setVisible(false);
-        this.questionLbl.setText(this.currentQuestion.getQuestion());
+        this.questionLbl.setText(this.gameEngine.getQuestionCounter() + 1 + ". " + this.currentQuestion.getQuestion());
         List<String> choices = this.currentQuestion.getRandomOrderedAnswers();
 
         if (fiftyWasJustUsed) {
@@ -129,7 +130,7 @@ public class InGameController {
 
     private void redirectToMenu(Event event, Alert alert) throws IOException {
         if (alert.showAndWait().get() == ButtonType.OK) {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/demo/gui/menu.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/demo/gui/menu.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
