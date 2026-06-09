@@ -6,12 +6,9 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,10 +24,8 @@ public class LeaderboardController {
     private List<Player> playerList;
     @FXML
     private TableView<Player> playerTableView;
-    private TableColumn<Player, Integer> rankColumn;
-    private TableColumn<Player, String> nameColumn;
-    private TableColumn<Player, Integer> scoreColumn;
-    private TableColumn<Player, String> timeColumn;
+    private TableColumn<Player, Integer> rankColumn, prizeColumn;
+    private TableColumn<Player, String> nameColumn, timeColumn;
 
     public void setLeaderboard(Leaderboard leaderboard) {
         this.leaderboard = leaderboard;
@@ -40,25 +35,25 @@ public class LeaderboardController {
 
         TableColumn<Player, Integer> rankColumn = new TableColumn<Player, Integer>("Rank");
         TableColumn<Player, String> nameColumn = new TableColumn<Player, String>("Name");
-        TableColumn<Player, Integer> scoreColumn = new TableColumn<Player, Integer>("Prize");
+        TableColumn<Player, Integer> prizeColumn = new TableColumn<Player, Integer>("Prize");
         TableColumn<Player, String> timeColumn = new TableColumn<Player, String>("Time");
 
         rankColumn.setPrefWidth(50);
         nameColumn.setPrefWidth(100);
-        scoreColumn.setPrefWidth(100);
+        prizeColumn.setPrefWidth(100);
         timeColumn.setPrefWidth(148);
 
         rankColumn.setStyle("-fx-alignment: CENTER;");
         nameColumn.setStyle("-fx-alignment: CENTER;");
-        scoreColumn.setStyle("-fx-alignment: CENTER;");
+        prizeColumn.setStyle("-fx-alignment: CENTER;");
         timeColumn.setStyle("-fx-alignment: CENTER;");
 
         rankColumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        scoreColumn.setCellValueFactory(new PropertyValueFactory<>("prize"));
+        prizeColumn.setCellValueFactory(new PropertyValueFactory<>("prize"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
 
-        playerTableView.getColumns().setAll(rankColumn, nameColumn, scoreColumn, timeColumn);
+        playerTableView.getColumns().setAll(rankColumn, nameColumn, prizeColumn, timeColumn);
     }
 
     public void backToMenu(ActionEvent event) throws IOException {

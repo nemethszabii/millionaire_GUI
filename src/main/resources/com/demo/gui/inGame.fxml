@@ -58,7 +58,7 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Button fx:id="quitToMenuBtn" layoutX="440.0" layoutY="449.0" mnemonicParsing="false" onAction="#quit" text="Quit" textFill="RED" />
+      <Button fx:id="toMenuBtn" layoutX="440.0" layoutY="449.0" mnemonicParsing="false" onAction="#quit" text="Quit" textFill="RED" />
       <Label fx:id="helpDisplayLbl" layoutX="10.0" layoutY="379.0" prefWidth="576.0" style="-fx-background-color: #1f1fab; -fx-border-color: #222222; -fx-border-width: 2;" text="Help display" visible="false" wrapText="true">
          <font>
             <Font size="15.0" />

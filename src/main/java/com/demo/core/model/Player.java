@@ -3,16 +3,13 @@ package com.demo.core.model;
 public class Player implements Comparable {
     private String name, formattedElapsedTime, prize, securePrize, nextPrize;
     private int rank;
-    private String[] availableHelps;
+    private long startTime, elapsedTime;
 
-    public void setFormattedElapsedTime(String elapsedTime) { this.formattedElapsedTime = elapsedTime; }
+    public String getFormattedElapsedTime() { return this.formattedElapsedTime; }
 
     public int getRank() { return rank; }
 
     public String getTime() { return formattedElapsedTime; }
-
-    public String[] getAvailableHelps() { return availableHelps; }
-    public void setAvailableHelps(String[] availableHelps) { this.availableHelps = availableHelps; }
 
     public String getName() {
         return name;
@@ -30,11 +27,12 @@ public class Player implements Comparable {
     public String getNextPrize() { return nextPrize; }
     public void setNextPrize(String value) { this.nextPrize = value; }
 
+    public long getElapsedTime() { return this.elapsedTime; }
+
     public Player() {
         this.prize = "$0";
         this.securePrize = "$0";
         this.nextPrize = "$0";
-        availableHelps = new String[] {"50:50", "Phone", "Audience"};
     }
 
     public Player(String rank, String name, String prize, String formattedElapsedTime) {
@@ -44,13 +42,29 @@ public class Player implements Comparable {
         this.formattedElapsedTime = formattedElapsedTime;
     }
 
+    public void startTimer() { this.startTime = System.currentTimeMillis(); }
+
+    public void stopTimer() {
+        this.elapsedTime = System.currentTimeMillis() - this.startTime;
+        createFormattedElapsedTime();
+    }
+
+    private void createFormattedElapsedTime() {
+        int sec = (int) Math.floor((double) this.elapsedTime / 1000) % 60;
+        int min = (int) Math.floor(((double) (this.elapsedTime / 1000) / 60) % 60);
+
+        String secString = sec < 10 ? "0" + sec : String.valueOf(sec);
+        String minString = min < 10 ? "0" + min : String.valueOf(min);
+        this.formattedElapsedTime = minString + ":" + secString;
+    }
+
     public static int getDataFromFormattedTime(String time, int start, int end) {
         return Integer.parseInt(time.substring(start, end));
     }
 
     @Override
     public String toString() {
-        return String.format("%s (%d) [%s]", this.name, this.prize, this.formattedElapsedTime);
+        return String.format("%s (%s) [%s]", this.name, this.prize, this.formattedElapsedTime);
     }
 
     @Override
@@ -62,13 +76,7 @@ public class Player implements Comparable {
         int pSec = Player.getDataFromFormattedTime(p.formattedElapsedTime, 3, 5);
 
         if (min == pMin) {
-            if (sec == pSec) {
-                return 0;
-            } else if (sec < pSec) {
-                return -1;
-            } else {
-                return 1;
-            }
+            return Integer.compare(sec, pSec);
         } else if (min > pMin) {
             return 1;
         } else {

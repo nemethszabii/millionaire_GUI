@@ -55,7 +55,7 @@
     -fx-text-fill: #3131b9;
 }
 
-#quitToMenuBtn {
+#toMenuBtn {
     -fx-text-fill: red;
     -fx-pref-width: 150px;
     -fx-pref-height: 30px;

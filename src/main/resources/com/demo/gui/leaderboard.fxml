@@ -13,7 +13,7 @@
             <Font size="37.0" />
          </font>
       </Label>
-      <Button layoutX="342.0" layoutY="440.0" mnemonicParsing="false" onAction="#backToMenu" style="-fx-text-fill: red;" text="Back" />
+      <Button fx:id="toMenuBtn" layoutX="435.0" layoutY="455.0" mnemonicParsing="false" onAction="#backToMenu" style="-fx-text-fill: red;" text="Back" />
       <TableView fx:id="playerTableView" layoutX="100.0" layoutY="75.0" prefHeight="350.0" prefWidth="400.0" />
    </children>
 </AnchorPane>

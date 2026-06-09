@@ -1,6 +1,7 @@
 package com.demo.gui.controller;
 
 import com.demo.core.logic.GameEngine;
+import com.demo.core.logic.Leaderboard;
 import com.demo.core.model.Player;
 import com.demo.core.model.Question;
 import javafx.event.ActionEvent;
@@ -25,6 +26,7 @@ public class InGameController {
     private byte usedHelpsCounter = 0;
     private byte counter = 1;
     private boolean fiftyWasJustUsed;
+    private Leaderboard leaderboard;
     @FXML
     private ListView helpsListView;
     @FXML
@@ -38,12 +40,15 @@ public class InGameController {
 
     public void setGameEngine(GameEngine sharedGameEngine) {
         this.gameEngine = sharedGameEngine;
+        this.leaderboard = this.gameEngine.getLeaderboard();
         this.player = this.gameEngine.getPlayer();
         this.currentQuestion = gameEngine.getCurrentQuestionObj();
         setUpInGameContent();
     }
 
     private void setUpInGameContent() {
+        this.player.startTimer();
+        this.helpDisplayLbl.setVisible(false);
         this.questionLbl.setText(this.currentQuestion.getQuestion());
         List<String> choices = this.currentQuestion.getRandomOrderedAnswers();
 
@@ -88,6 +93,9 @@ public class InGameController {
                 setUpInGameContent();
                 this.counter++;
             } else {
+                this.player.stopTimer();
+                this.leaderboard.addPlayerToLeaderboard(this.player);
+                this.leaderboard.write();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Congratulations!");
                 alert.setHeaderText("You've just won the game!");

@@ -10,7 +10,6 @@ import java.util.*;
 public class Leaderboard {
     private File file;
     private String filename;
-    private GuiDisplay gui;
     private List<Player> leaderboard;
 
     public Leaderboard(String filename) {
@@ -45,20 +44,6 @@ public class Leaderboard {
         return players;
     }
 
-    public void show() {
-        gui.displayMsg("\nLEADERBOARD");
-        try (Scanner sc = new Scanner(file)) {
-            if (file.exists()) {
-                while (sc.hasNextLine()) {
-                    gui.displayMsg(sc.nextLine());
-                }
-            }
-        } catch (Exception e) {
-            gui.displayMsg(e.getMessage());
-        }
-        gui.displayMsg("");
-    }
-
     public void write() {
         Collections.sort(leaderboard);
         try (FileWriter fw = new FileWriter(filename)) {
@@ -68,7 +53,7 @@ public class Leaderboard {
                 }
             }
         } catch (Exception e) {
-            gui.displayMsg(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 }
