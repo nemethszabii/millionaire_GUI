@@ -23,6 +23,7 @@ public class InGameController {
     private Player player;
     private Question currentQuestion;
     private byte usedHelpsCounter = 0;
+    private byte counter = 1;
     private boolean fiftyWasJustUsed;
     @FXML
     private ListView helpsListView;
@@ -49,6 +50,7 @@ public class InGameController {
         if (fiftyWasJustUsed) {
             this.choice1.setVisible(true);
             this.choice4.setVisible(true);
+            this.fiftyWasJustUsed = false;
         }
 
         if (usedHelpsCounter == 3) {
@@ -67,6 +69,7 @@ public class InGameController {
 
     private void hideHelpOptions() {
         helpsListView.setVisible(false);
+        resetHelpsBtn.setVisible(false);
         showHelpResultBtn.setVisible(false);
         helpDisplayLbl.setLayoutY(helpDisplayLbl.getLayoutY() - 110);
         helpDisplayLbl.setText("You have used up all of the available helps!");
@@ -78,10 +81,19 @@ public class InGameController {
         RadioButton selectedRb = (RadioButton)choiceGroup.getSelectedToggle();
         String val = selectedRb.getText();
         if (this.currentQuestion.getAnswer().equals(val)) {
-            this.gameEngine.incrementQuestionCounter();
-            this.gameEngine.incrementPlayerPrize();
-            this.currentQuestion = this.gameEngine.getCurrentQuestionObj();
-            setUpInGameContent();
+            if (this.counter < 15) {
+                this.gameEngine.incrementQuestionCounter();
+                this.gameEngine.incrementPlayerPrize();
+                this.currentQuestion = this.gameEngine.getCurrentQuestionObj();
+                setUpInGameContent();
+                this.counter++;
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Congratulations!");
+                alert.setHeaderText("You've just won the game!");
+                alert.setContentText("Your knowledge is supreme!\nYour result is written to the leaderboard.");
+                redirectToMenu(event, alert);
+            }
             this.submitBtn.setDisable(true);
         } else {
             handleLose(event);
@@ -128,11 +140,15 @@ public class InGameController {
             this.fiftyWasJustUsed = true;
         } else if (phoneRadioBtn.isSelected()) {
             phoneRadioBtn.setVisible(false);
-            helpDisplayLbl.setText(this.gameEngine.getHelp().phone(this.currentQuestion));
+            helpDisplayLbl.setText("Phone: " + this.gameEngine.getHelp().phone(this.currentQuestion));
             helpDisplayLbl.setVisible(true);
         } else if (audienceRadioBtn.isSelected()) {
             audienceRadioBtn.setVisible(false);
-            helpDisplayLbl.setText(this.gameEngine.getHelp().audience(this.currentQuestion));
+            if (fiftyWasJustUsed) {
+                helpDisplayLbl.setText(this.gameEngine.getHelp().audience(this.currentQuestion, true));
+            } else {
+                helpDisplayLbl.setText(this.gameEngine.getHelp().audience(this.currentQuestion));
+            }
             helpDisplayLbl.setVisible(true);
         }
         usedHelpsCounter++;
