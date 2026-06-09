@@ -23,6 +23,7 @@ public class InGameController {
     private Player player;
     private Question currentQuestion;
     private byte usedHelpsCounter = 0;
+    private boolean fiftyWasJustUsed;
     @FXML
     private ListView helpsListView;
     @FXML
@@ -44,6 +45,16 @@ public class InGameController {
     private void setUpInGameContent() {
         this.questionLbl.setText(this.currentQuestion.getQuestion());
         List<String> choices = this.currentQuestion.getRandomOrderedAnswers();
+
+        if (fiftyWasJustUsed) {
+            this.choice1.setVisible(true);
+            this.choice4.setVisible(true);
+        }
+
+        if (usedHelpsCounter == 3) {
+            hideHelpOptions();
+        }
+
         this.choice1.setText(choices.get(0));
         this.choice2.setText(choices.get(1));
         this.choice3.setText(choices.get(2));
@@ -52,6 +63,15 @@ public class InGameController {
         this.prizeLbl.setText(this.player.getPrize());
         this.securePrizeLbl.setText(this.player.getSecurePrize());
         this.nextPrizeLbl.setText(this.player.getNextPrize());
+    }
+
+    private void hideHelpOptions() {
+        helpsListView.setVisible(false);
+        showHelpResultBtn.setVisible(false);
+        helpDisplayLbl.setLayoutY(helpDisplayLbl.getLayoutY() - 110);
+        helpDisplayLbl.setText("You have used up all of the available helps!");
+        helpLbl.setVisible(false);
+        this.usedHelpsCounter = 0;
     }
 
     public void onSubmit(ActionEvent event) throws IOException {
@@ -100,24 +120,22 @@ public class InGameController {
     public void showHelpResult() {
         if (fiftyRadioBtn.isSelected()) {
             fiftyRadioBtn.setVisible(false);
-            helpDisplayLbl.setText("Displaying 50:50 result");
+            String[] resultOfFiftyFifty = this.gameEngine.getHelp().fiftyFifty(this.currentQuestion);
+            this.choice1.setVisible(false);
+            this.choice4.setVisible(false);
+            this.choice2.setText(resultOfFiftyFifty[0]);
+            this.choice3.setText(resultOfFiftyFifty[1]);
+            this.fiftyWasJustUsed = true;
         } else if (phoneRadioBtn.isSelected()) {
             phoneRadioBtn.setVisible(false);
-            helpDisplayLbl.setText("Displaying phone result");
+            helpDisplayLbl.setText(this.gameEngine.getHelp().phone(this.currentQuestion));
+            helpDisplayLbl.setVisible(true);
         } else if (audienceRadioBtn.isSelected()) {
             audienceRadioBtn.setVisible(false);
-            helpDisplayLbl.setText("Displaying audience result");
+            helpDisplayLbl.setText(this.gameEngine.getHelp().audience(this.currentQuestion));
+            helpDisplayLbl.setVisible(true);
         }
         usedHelpsCounter++;
-        helpDisplayLbl.setVisible(true);
-
-        if (usedHelpsCounter == 3) {
-            helpsListView.setVisible(false);
-            showHelpResultBtn.setVisible(false);
-            helpDisplayLbl.setLayoutY(helpDisplayLbl.getLayoutY() - 110);
-            helpDisplayLbl.setText("You have used up all of the available helps!");
-            helpLbl.setVisible(false);
-        }
         resetHelpsBtn.setDisable(true);
         showHelpResultBtn.setDisable(true);
     }

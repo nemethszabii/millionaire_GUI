@@ -58,13 +58,12 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Button fx:id="quitToMenuBtn" layoutX="435.0" layoutY="434.0" mnemonicParsing="false" onAction="#quit" text="Quit" textFill="RED" />
-      <Label fx:id="helpDisplayLbl" layoutX="10.0" layoutY="379.0" prefHeight="42.0" prefWidth="576.0" style="-fx-background-color: #1f1fab; -fx-border-color: #222222; -fx-border-width: 2;" text="Help display" visible="false">
+      <Button fx:id="quitToMenuBtn" layoutX="440.0" layoutY="449.0" mnemonicParsing="false" onAction="#quit" text="Quit" textFill="RED" />
+      <Label fx:id="helpDisplayLbl" layoutX="10.0" layoutY="379.0" prefWidth="576.0" style="-fx-background-color: #1f1fab; -fx-border-color: #222222; -fx-border-width: 2;" text="Help display" visible="false" wrapText="true">
          <font>
-            <Font size="25.0" />
+            <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="submitBtn" disable="true" layoutX="10.0" layoutY="434.0" mnemonicParsing="false" onAction="#onSubmit" style="-fx-text-fill: #3131b9;" text="Submit" />
       <RadioButton fx:id="fiftyRadioBtn" contentDisplay="CENTER" layoutX="36.0" layoutY="296.0" mnemonicParsing="false" onAction="#enableHelpActionButtons" prefHeight="26.0" prefWidth="89.0" text="50:50" textAlignment="CENTER">
          <font>
             <Font size="17.0" />
@@ -152,7 +151,8 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="showHelpResultBtn" disable="true" layoutX="14.0" layoutY="338.0" mnemonicParsing="false" onAction="#showHelpResult" prefHeight="52.0" prefWidth="180.0" text="Show Result" />
-      <Button fx:id="resetHelpsBtn" disable="true" layoutX="486.0" layoutY="338.0" mnemonicParsing="false" onAction="#resetHelps" prefHeight="52.0" prefWidth="180.0" text="Reset" />
+      <Button fx:id="showHelpResultBtn" disable="true" layoutX="14.0" layoutY="338.0" mnemonicParsing="false" onAction="#showHelpResult" prefWidth="180.0" text="Show Result" />
+      <Button fx:id="resetHelpsBtn" disable="true" layoutX="486.0" layoutY="338.0" mnemonicParsing="false" onAction="#resetHelps" prefWidth="180.0" text="Reset" />
+      <Button fx:id="submitBtn" disable="true" layoutX="14.0" layoutY="449.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
    </children>
 </AnchorPane>

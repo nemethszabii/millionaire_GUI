@@ -17,6 +17,15 @@
     -fx-max-width: 590px;
 }
 
+#helpDisplayLbl {
+    -fx-wrap-text: true;
+    -fx-min-height: -fx-computed-size;
+    -fx-pref-height: -fx-computed-size;
+    -fx-max-height: -fx-computed-size;
+    -fx-max-width: 590px;
+    -fx-padding: 5px;
+}
+
 .button {
     -fx-pref-width: 250px;
     -fx-font-family: "Arial Rounded MT Bold";
@@ -39,12 +48,21 @@
 #submitBtn {
     -fx-pref-width: 150px;
     -fx-pref-height: 30px;
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+    -fx-padding: 3px;
+    -fx-font-size: 23px;
+    -fx-text-fill: #3131b9;
 }
 
 #quitToMenuBtn {
     -fx-text-fill: red;
     -fx-pref-width: 150px;
     -fx-pref-height: 30px;
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+    -fx-padding: 3px;
+    -fx-font-size: 23px;
 }
 
 #showHelpResultBtn {

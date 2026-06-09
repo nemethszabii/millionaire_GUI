@@ -25,7 +25,7 @@ public class GameEngine {
         this.gameContent = new GameContent(qnaFile.getPath());
         this.leaderboard = new Leaderboard(leaderboardFile.getPath());
         this.player = new Player();
-        this.help = new Help(player);
+        this.help = new Help();
         setUpPrizes();
     }
 
@@ -40,6 +40,8 @@ public class GameEngine {
         TreeMap<Integer, Question> qna = this.gameContent.getQna();
         return qna.get(this.questionCounter);
     }
+
+    public Help getHelp() { return this.help; }
 
     public void incrementQuestionCounter() { this.questionCounter++; }
 

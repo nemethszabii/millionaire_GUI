@@ -1,7 +1,6 @@
 package com.demo.core.model;
 
 import java.util.List;
-import java.util.TreeMap;
 
 public class Question {
     private String question;
