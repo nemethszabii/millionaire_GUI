@@ -7,6 +7,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -57,8 +58,8 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Button fx:id="quitToMenuBtn" layoutX="337.0" layoutY="434.0" mnemonicParsing="false" onAction="#quit" prefHeight="52.0" prefWidth="223.0" text="Quit" textFill="RED" />
-      <Label fx:id="helpDisplayLbl" layoutX="10.0" layoutY="369.0" prefHeight="52.0" prefWidth="576.0" style="-fx-background-color: #1f1fab; -fx-border-color: #222222; -fx-border-width: 2;" text="Help display" visible="false">
+      <Button fx:id="quitToMenuBtn" layoutX="435.0" layoutY="434.0" mnemonicParsing="false" onAction="#quit" text="Quit" textFill="RED" />
+      <Label fx:id="helpDisplayLbl" layoutX="10.0" layoutY="379.0" prefHeight="42.0" prefWidth="576.0" style="-fx-background-color: #1f1fab; -fx-border-color: #222222; -fx-border-width: 2;" text="Help display" visible="false">
          <font>
             <Font size="25.0" />
          </font>
@@ -98,33 +99,60 @@
       </Label>
       <VBox layoutX="302.0" layoutY="76.0" prefHeight="185.0" prefWidth="285.0" spacing="10.0" style="-fx-border-color: #222222; -fx-border-width: 2; -fx-background-color: #1f1fab;">
          <children>
-            <Label fx:id="prizeLbl" text="Prize: $">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Label>
-            <Label fx:id="securePrizeLbl" text="Secure Prize: $">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Label>
-            <Label fx:id="nextPrizeLbl" layoutX="12.0" layoutY="46.0" text="Next Prize: $">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Label>
+            <HBox prefHeight="26.0" prefWidth="282.0">
+               <children>
+                  <Label text="Prize:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="prizeLbl" style="-fx-text-fill: #f5ee0c;">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="12.0" layoutY="12.0" prefHeight="26.0" prefWidth="282.0">
+               <children>
+                  <Label text="Secure Prize:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="securePrizeLbl" style="-fx-text-fill: #f5ee0c;">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="12.0" layoutY="49.0" prefHeight="26.0" prefWidth="282.0">
+               <children>
+                  <Label text="Next Prize:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nextPrizeLbl" style="-fx-text-fill: #f5ee0c;">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <Button fx:id="showHelpResultBtn" disable="true" layoutX="12.0" layoutY="338.0" mnemonicParsing="false" onAction="#showHelpResult" prefHeight="52.0" prefWidth="180.0" text="Show Result" />
-      <Button fx:id="resetHelpsBtn" disable="true" layoutX="488.0" layoutY="338.0" mnemonicParsing="false" onAction="#resetHelps" prefHeight="52.0" prefWidth="180.0" text="Reset" />
+      <Button fx:id="showHelpResultBtn" disable="true" layoutX="14.0" layoutY="338.0" mnemonicParsing="false" onAction="#showHelpResult" prefHeight="52.0" prefWidth="180.0" text="Show Result" />
+      <Button fx:id="resetHelpsBtn" disable="true" layoutX="486.0" layoutY="338.0" mnemonicParsing="false" onAction="#resetHelps" prefHeight="52.0" prefWidth="180.0" text="Reset" />
    </children>
 </AnchorPane>

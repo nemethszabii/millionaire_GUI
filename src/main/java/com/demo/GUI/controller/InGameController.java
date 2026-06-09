@@ -49,9 +49,9 @@ public class InGameController {
         this.choice3.setText(choices.get(2));
         this.choice4.setText(choices.get(3));
 
-        this.prizeLbl.setText("Prize: " + this.player.getPrize());
-        this.securePrizeLbl.setText("Secure Prize: " + this.player.getSecurePrize());
-        this.nextPrizeLbl.setText("Next Prize: " + this.player.getNextPrize());
+        this.prizeLbl.setText(this.player.getPrize());
+        this.securePrizeLbl.setText(this.player.getSecurePrize());
+        this.nextPrizeLbl.setText(this.player.getNextPrize());
     }
 
     public void onSubmit(ActionEvent event) throws IOException {
@@ -69,9 +69,7 @@ public class InGameController {
         selectedRb.setSelected(false);
     }
 
-    public void enableSubmitBtn(ActionEvent event) throws IOException {
-        this.submitBtn.setDisable(false);
-    }
+    public void enableSubmitBtn(ActionEvent event) throws IOException { this.submitBtn.setDisable(false); }
 
     private void handleLose(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -124,7 +122,7 @@ public class InGameController {
         showHelpResultBtn.setDisable(true);
     }
 
-    public void enableHelpActionButtons() {
+    public void enableHelpActionButtons(ActionEvent event) {
         resetHelpsBtn.setDisable(false);
         showHelpResultBtn.setDisable(false);
     }

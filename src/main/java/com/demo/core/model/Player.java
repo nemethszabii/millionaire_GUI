@@ -31,9 +31,9 @@ public class Player implements Comparable {
     public void setNextPrize(String value) { this.nextPrize = value; }
 
     public Player() {
-        this.prize = "0";
-        this.securePrize = "0";
-        this.nextPrize = "0";
+        this.prize = "$0";
+        this.securePrize = "$0";
+        this.nextPrize = "$0";
         availableHelps = new String[] {"50:50", "Phone", "Audience"};
     }
 

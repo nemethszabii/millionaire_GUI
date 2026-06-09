@@ -36,8 +36,15 @@
     -fx-text-fill: white;
 }
 
+#submitBtn {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 30px;
+}
+
 #quitToMenuBtn {
     -fx-text-fill: red;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 30px;
 }
 
 #showHelpResultBtn {
