@@ -1,7 +1,7 @@
 # 💸 'Who wants to be a millionaire?' GUI project
 
-## This project showcases OOP, DSA, Algorithms, File Handling, Event Driven Development and many more.
-## 🖥️ This is my first ever project creating a game with a desktop GUI.
+### This project showcases OOP, DSA, Algorithms, File Handling, Event Driven Development and many more.
+- 🖥️ This is my first ever project creating a game with a desktop GUI.
 
 ## 🛠️ Built With
 
