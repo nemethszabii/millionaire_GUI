@@ -1,12 +1,12 @@
 package com.demo.gui.controller;
 
 import com.demo.core.logic.GameEngine;
+import com.demo.core.model.Player;
 import com.demo.core.model.Question;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,70 +14,63 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class InGameController {
     private Stage stage;
     private Scene scene;
     private GameEngine gameEngine;
+    private Player player;
     private Question currentQuestion;
     private byte usedHelpsCounter = 0;
     @FXML
-    private Label helpDisplayLabel;
-    @FXML
-    private RadioButton fiftyRadioBtn;
-    @FXML
-    private RadioButton phoneRadioBtn;
-    @FXML
-    private RadioButton audienceRadioBtn;
-    @FXML
     private ListView helpsListView;
     @FXML
-    private Button showHelpResultBtn;
-    @FXML
-    private Label helpLabel;
-    @FXML
-    private Label questionLabel;
-    @FXML
-    private Button resetHelpsBtn;
+    private Button submitBtn, showHelpResultBtn, resetHelpsBtn;
     @FXML
     private ToggleGroup choiceGroup;
     @FXML
-    private RadioButton choice1;
+    private RadioButton fiftyRadioBtn, phoneRadioBtn, audienceRadioBtn, choice1, choice2,  choice3, choice4;
     @FXML
-    private RadioButton choice2;
-    @FXML
-    private RadioButton choice3;
-    @FXML
-    private RadioButton choice4;
+    private Label helpDisplayLbl, questionLbl, helpLbl, prizeLbl, securePrizeLbl, nextPrizeLbl;
 
     public void setGameEngine(GameEngine sharedGameEngine) {
         this.gameEngine = sharedGameEngine;
+        this.player = this.gameEngine.getPlayer();
         this.currentQuestion = gameEngine.getCurrentQuestionObj();
         setUpInGameContent();
     }
 
     private void setUpInGameContent() {
-        this.questionLabel.setText(this.currentQuestion.getQuestion());
+        this.questionLbl.setText(this.currentQuestion.getQuestion());
         List<String> choices = this.currentQuestion.getRandomOrderedAnswers();
         this.choice1.setText(choices.get(0));
         this.choice2.setText(choices.get(1));
         this.choice3.setText(choices.get(2));
         this.choice4.setText(choices.get(3));
+
+        this.prizeLbl.setText("Prize: " + this.player.getPrize());
+        this.securePrizeLbl.setText("Secure Prize: " + this.player.getSecurePrize());
+        this.nextPrizeLbl.setText("Next Prize: " + this.player.getNextPrize());
     }
 
     public void onSubmit(ActionEvent event) throws IOException {
-        RadioButton selected = (RadioButton)choiceGroup.getSelectedToggle();
-        String val = selected.getText();
+        RadioButton selectedRb = (RadioButton)choiceGroup.getSelectedToggle();
+        String val = selectedRb.getText();
         if (this.currentQuestion.getAnswer().equals(val)) {
             this.gameEngine.incrementQuestionCounter();
+            this.gameEngine.incrementPlayerPrize();
             this.currentQuestion = this.gameEngine.getCurrentQuestionObj();
             setUpInGameContent();
+            this.submitBtn.setDisable(true);
         } else {
             handleLose(event);
         }
+        selectedRb.setSelected(false);
+    }
+
+    public void enableSubmitBtn(ActionEvent event) throws IOException {
+        this.submitBtn.setDisable(false);
     }
 
     private void handleLose(ActionEvent event) throws IOException {
@@ -88,7 +81,7 @@ public class InGameController {
         redirectToMenu(event, alert);
     }
 
-    public void backToMenu(ActionEvent event) throws IOException {
+    public void quit(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Confirmation");
         alert.setHeaderText("Quit Game");
@@ -109,23 +102,23 @@ public class InGameController {
     public void showHelpResult() {
         if (fiftyRadioBtn.isSelected()) {
             fiftyRadioBtn.setVisible(false);
-            helpDisplayLabel.setText("Displaying 50:50 result");
+            helpDisplayLbl.setText("Displaying 50:50 result");
         } else if (phoneRadioBtn.isSelected()) {
             phoneRadioBtn.setVisible(false);
-            helpDisplayLabel.setText("Displaying phone result");
+            helpDisplayLbl.setText("Displaying phone result");
         } else if (audienceRadioBtn.isSelected()) {
             audienceRadioBtn.setVisible(false);
-            helpDisplayLabel.setText("Displaying audience result");
+            helpDisplayLbl.setText("Displaying audience result");
         }
         usedHelpsCounter++;
-        helpDisplayLabel.setVisible(true);
+        helpDisplayLbl.setVisible(true);
 
         if (usedHelpsCounter == 3) {
             helpsListView.setVisible(false);
             showHelpResultBtn.setVisible(false);
-            helpDisplayLabel.setLayoutY(helpDisplayLabel.getLayoutY() - 110);
-            helpDisplayLabel.setText("You have used up all of the available helps!");
-            helpLabel.setVisible(false);
+            helpDisplayLbl.setLayoutY(helpDisplayLbl.getLayoutY() - 110);
+            helpDisplayLbl.setText("You have used up all of the available helps!");
+            helpLbl.setVisible(false);
         }
         resetHelpsBtn.setDisable(true);
         showHelpResultBtn.setDisable(true);

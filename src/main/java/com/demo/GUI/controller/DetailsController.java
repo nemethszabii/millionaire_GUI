@@ -42,7 +42,7 @@ public class DetailsController implements Initializable {
             InGameController inGameController = loader.getController();
 
             this.gameEngine = new GameEngine(); // SET UP GAME ENGINE
-            this.gameEngine.setPlayerName(usernameLabel.getText());
+            this.gameEngine.getPlayer().setName(usernameLabel.getText());
             inGameController.setGameEngine(this.gameEngine); // PASS SHARED GAME ENGINE TO THE NEXT CONTROLLER
 
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
