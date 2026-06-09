@@ -11,6 +11,9 @@
 * **Styling:** CSS
 * **Data Storage:** Flat File Database (`.txt` file handling)
 
+## ▶️ How to run
+* **Enter command:** mvn javafx:run
+
 ## 🚀 Key Features
 
 * **Dynamic Question Shuffling**
